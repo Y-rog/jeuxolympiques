@@ -1,0 +1,34 @@
+/*Barre de navigation*/
+.nav-bar {
+    background-color: var(--primary-color);
+    height: 60px;
+    color: var(--white-color);
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*Liens au centre de la barre de navigation*/
+.nav-link-center {
+    padding: 0 20px;
+}
+
+/*Personnalisation des liens de la barre de navigation*/
+.mat-mdc-unelevated-button:not(:disabled) {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: var(--white-color) 1px solid;
+}
+
+/*Personnalisation du bouton de connexion de la barre de navigation*/
+.mat-mdc-unelevated-button:not(:disabled):hover {
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+    border: var(--tertiary-color) 1px solid;
+}
+
+.mat-mdc-button:not(:disabled) {
+    color: var(--white-color);
+}
+
