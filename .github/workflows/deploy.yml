@@ -48,6 +48,6 @@ jobs:
           ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
           cd /home/ubuntu/jeuxolympiques/
           npm init -y
-          npm install --prod
+          npm install --omit=dev
           sudo systemctl restart nginx
           EOF
