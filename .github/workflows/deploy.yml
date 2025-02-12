@@ -27,11 +27,11 @@ jobs:
 
     # Installation des dépendances
       - name: Install dependencies
-        run: npm install 
+        run: npm install --omit=dev
 
     # Build du projet Angular
       - name: Build Angular project
-        run: npm run build --omit=dev
+        run: ng build --prod
 
     # Déploiement sur AWS Lightsail
       - name: Deploy to AWS Lightsail
@@ -46,7 +46,7 @@ jobs:
           scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/ $USERNAME@$SERVER_IP:/home/ubuntu/jeuxolympiques/
 
           ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
-          cd /home/ubuntu/jeuxolympiques/dist/jeuxolympiques/
+          cd /home/ubuntu/jeuxolympiques/
           npm init -y
           npm install --omit=dev
           sudo systemctl restart nginx
