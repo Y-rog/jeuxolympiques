@@ -43,13 +43,10 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
           SERVER_IP: ${{ secrets.LIGHTSAIL_SERVER_IP }}
-          USERNAME: ${{ secrets.USERNAME_AWS }}
+          USERNAME: 'ubuntu'
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
-          chown -R $USERNAME /home/ubuntu/jeuxolympiques/
-          chmod 755 /home/ubuntu/jeuxolympiques/
-
 
           scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/ $USERNAME@$SERVER_IP:/home/ubuntu/jeuxolympiques/
 
