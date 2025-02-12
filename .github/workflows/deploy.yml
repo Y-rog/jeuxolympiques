@@ -43,10 +43,10 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
 
-          scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/browser/ $USERNAME@$SERVER_IP:/home/ubuntu/jeuxolympiques/dist/jeuxolympiques/browser/
+          scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/browser/ $USERNAME@$SERVER_IP:/home/ubuntu/jeuxolympiques/
 
           ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
           cd /home/ubuntu/jeuxolympiques/
-          npm install --production
+          npm install --prod
           sudo systemctl restart nginx
           EOF
