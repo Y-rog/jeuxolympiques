@@ -12,6 +12,8 @@ jobs:
     # Système d'exploitation utilisé pour exécuter les actions
     runs-on: ubuntu-latest
 
+    environment: prod
+
     # Définition des étapes du job
     steps:
       # Récupération du code source
@@ -40,6 +42,7 @@ jobs:
           USERNAME: 'ubuntu'
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
 
           scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/* $USERNAME@$SERVER_IP:/var/www/jeuxolympiques/
 
