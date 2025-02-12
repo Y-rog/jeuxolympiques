@@ -28,6 +28,10 @@ jobs:
     # Installation des dépendances
       - name: Install dependencies
         run: npm install
+    
+    # Installation de Angular CLI
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
 
     # Build du projet Angular
       - name: Build Angular project
