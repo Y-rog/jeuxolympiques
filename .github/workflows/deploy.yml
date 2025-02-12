@@ -36,7 +36,7 @@ jobs:
     # Build du projet Angular
       - name: Build Angular project
         run: ng build --configuration production
-        
+
     # Déploiement sur AWS Lightsail
       - name: Deploy to AWS Lightsail
         env:
@@ -54,5 +54,4 @@ jobs:
           npm init -y
           npm install --omit=dev
           sudo systemctl restart nginx
-          rm private_key.pem
           EOF
