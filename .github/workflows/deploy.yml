@@ -40,10 +40,9 @@ jobs:
           USERNAME: 'ubuntu'
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
-          chmod 600 private_key.pem
 
           scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/* $USERNAME@$SERVER_IP:/var/www/jeuxolympiques/
-          
+
           ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
           cd /var/www/jeuxolympiques
           npm install --production
