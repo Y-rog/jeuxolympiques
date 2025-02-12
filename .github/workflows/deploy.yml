@@ -30,26 +30,4 @@ jobs:
       
       # Build du projet Angular
       - name: Build Angular project
-        run: npm run build --prod  
-
-      - name: Deploy to AWS Lightsail
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
-          SERVER_IP: ${{ secrets.LIGHTSAIL_SERVER_IP }}  
-          USERNAME: 'ubuntu'  
-        run: 
-          # Créer un fichier contenant la clé privée
-          echo "$SSH_PRIVATE_KEY" > private_key.pem
-          # Changer les permissions du fichier
-          chmod 600 private_key.pem
-          # Copier les fichiers de build vers l'instance Lightsail
-          scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/* $USERNAME@$SERVER_IP:/var/www/jeuxolympiques/
-          # Se connecter en SSH pour redémarrer l'application
-          ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
-          # Se rendre dans le répertoire de l'application
-          cd /var/www/jeuxolympiques
-          # Installer les dépendances de production
-          npm install --production
-          # Redémarrer l'application avec
-          sudo systemctl restart your-angular-app
-          EOF
+        run: npm run build --prod
