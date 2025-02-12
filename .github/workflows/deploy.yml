@@ -38,7 +38,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
           SERVER_IP: ${{ secrets.LIGHTSAIL_SERVER_IP }}  
           USERNAME: 'ubuntu'  
-        run: 
+        run: |
           # Créer un fichier contenant la clé privée
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           # Changer les permissions du fichier
