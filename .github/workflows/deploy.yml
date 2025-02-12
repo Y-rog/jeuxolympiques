@@ -47,7 +47,7 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
-
+          
           scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/ $USERNAME@$SERVER_IP:/home/ubuntu/jeuxolympiques/
 
           ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
