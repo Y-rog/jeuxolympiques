@@ -55,14 +55,8 @@ jobs:
 
           # Connexion au serveur et exécution des commandes
           ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
-          
-          # Vérification de la présence du fichier package.json sinon création
           cd /home/ubuntu/jeuxolympiques/
-          [ ! -f package.json ] && npm init -y
-
-          # Installation des dépendances de production
+          npm init -y
           npm install --omit=dev
-
-          # Redémarrage du serveur Nginx
           sudo systemctl restart nginx
           EOF
