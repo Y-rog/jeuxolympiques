@@ -46,7 +46,7 @@ jobs:
           scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/browser/ $USERNAME@$SERVER_IP:/home/ubuntu/jeuxolympiques
 
           ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
-          cd /var/www/jeuxolympiques
+          cd /home/ubuntu/jeuxolympiques
           npm install --production
-          sudo systemctl restart your-angular-app
+          sudo systemctl restart nginx
           EOF
