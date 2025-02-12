@@ -11,7 +11,7 @@ jobs:
   build:
     # Système d'exploitation utilisé pour exécuter les actions
     runs-on: ubuntu-latest
-    
+
     # Définition des étapes du job
     steps:
       # Récupération du code source
@@ -39,14 +39,15 @@ jobs:
           SERVER_IP: ${{ secrets.LIGHTSAIL_SERVER_IP }}
           USERNAME: 'ubuntu'
         run: |
-          # Créer un fichier contenant la clé privée
-          echo "SSH_PRIVATE_KEY" > private_key.pem
+
+          # Créer un fichier pour la clé privée
+          echo "$SSH_PRIVATE_KEY" > private_key.pem
           # Changer les permissions du fichier
           chmod 600 private_key.pem
           # Copier les fichiers de build vers l'instance Lightsail
-          scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/* USERNAME@SERVER_IP:/var/www/jeuxolympiques/
+          scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/* $USERNAME@$SERVER_IP:/var/www/jeuxolympiques/
           # Se connecter en SSH pour redémarrer l'application
-          ssh -i private_key.pem -o StrictHostKeyChecking=no USERNAME@SERVER_IP << 'EOF'
+          ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
           # Se rendre dans le répertoire de l'application
           cd /var/www/jeuxolympiques
           # Installer les dépendances de production
