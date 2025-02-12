@@ -27,7 +27,7 @@ jobs:
 
     # Installation des dépendances
       - name: Install dependencies
-        run: npm install --omit=dev -g @angular/cli
+        run: npm install
 
     # Build du projet Angular
       - name: Build Angular project
