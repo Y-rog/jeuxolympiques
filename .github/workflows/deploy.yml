@@ -5,7 +5,7 @@ on:
    push:
     branches:
       - main 
-      
+
 # Définition des jobs
 jobs:
   build:
@@ -43,16 +43,26 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
           SERVER_IP: ${{ secrets.LIGHTSAIL_SERVER_IP }}
-          USERNAME: 'ubuntu'
+          USERNAME: ${{ secrets.USERNAME_AWS }}
         run: |
+
+          # Création du fichier private_key.pem
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
 
+          # Copie des fichiers sur le serveur
           scp -i private_key.pem -o StrictHostKeyChecking=no -r dist/jeuxolympiques/ $USERNAME@$SERVER_IP:/home/ubuntu/jeuxolympiques/
 
+          # Connexion au serveur et exécution des commandes
           ssh -i private_key.pem -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
+          
+          # Vérification de la présence du fichier package.json sinon création
           cd /home/ubuntu/jeuxolympiques/
-          npm init -y
+          [ ! -f package.json ] && npm init -y
+
+          # Installation des dépendances de production
           npm install --omit=dev
+
+          # Redémarrage du serveur Nginx
           sudo systemctl restart nginx
           EOF
