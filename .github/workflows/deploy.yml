@@ -37,7 +37,7 @@ jobs:
       - name: Deploy to AWS Lightsail
         env:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
-          SERVER_IP: ${{ secrets.LIGHTSAIL_SERVER_IP }}
+          SERVER_IP: '35.180.166.22'
           USERNAME: 'ubuntu'
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
