@@ -32,7 +32,6 @@ jobs:
       - name: Build Angular project
         run: npm run build --prod  
 
-      # Déploiement sur AWS Lightsail
       - name: Deploy to AWS Lightsail
         env:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
