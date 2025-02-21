@@ -13,5 +13,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --white-color: #ffffff;
 }
 
+h1 {
+    text-align: center;
+}  
 
 
