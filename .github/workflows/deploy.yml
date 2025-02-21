@@ -1,0 +1,81 @@
+name: CI/CD Pipeline for Angular App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build Docker image
+        run: |
+          docker build -t jeuxolympiques .
+
+      - name: Save Docker image as tarball
+        run: |
+          docker save -o jeuxolympiques.tar jeuxolympiques
+
+      - name: Upload Docker image tarball as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jeuxolympiques
+          path: jeuxolympiques.tar
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download Docker image tarball artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: jeuxolympiques
+
+
+      - name: SCP Docker image to Lightsail instance
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.LIGHTSAIL_HOST }}
+          username: ${{ secrets.LIGHTSAIL_USERNAME }}
+          key: ${{ secrets.LIGHTSAIL_PRIVATE_KEY }}
+          source: jeuxolympiques.tar
+          target: /home/ubuntu
+          ssh_options: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v"
+
+      - name: SSH to Lightsail and load Docker image
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.LIGHTSAIL_HOST }}
+          username: ${{ secrets.LIGHTSAIL_USERNAME }}
+          key: ${{ secrets.LIGHTSAIL_PRIVATE_KEY }}
+          ssh_options: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v"
+          script: |
+            ls -l /home/ubuntu/jeuxolympiques.tar
+            file /home/ubuntu/jeuxolympiques.tar
+            if [ ! -f /home/ubuntu/jeuxolympiques.tar ]; then
+              echo "Erreur : le fichier jeuxolympiques.tar n'est pas un fichier valide."
+              exit 1
+            fi
+            docker load -i /home/ubuntu/jeuxolympiques.tar
+            docker stop jeuxolympiques || true
+            docker rm jeuxolympiques || true
+            docker run -d --name jeuxolympiques -p 80:80 jeuxolympiques
