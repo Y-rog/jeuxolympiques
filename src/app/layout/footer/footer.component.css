@@ -1,0 +1,53 @@
+/* Footer */
+.footer-container {
+    background-color: var(--primary-color);
+    height: 120px;
+    margin: 20px 0 0;
+    padding: 0 20px ;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Le footer est divisé en 2 parties 
+ La partie supérieure contient le logo et les réseaux sociaux */
+.top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.right-container {
+    margin-top: 10px;
+}
+
+.left-container {
+    color: var(--white-color);
+}
+
+.fa-brands {
+    color: var(--white-color);
+    margin: 0 10px;
+}
+
+/* La partie inférieure contient les liens vers les pages légales du site */
+.bottom-container {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* Les liens */
+.mat-mdc-button:not(:disabled) {
+    color: var(--white-color);
+}
+
+/* Les séparateurs entre les liens */
+.separator {
+    margin: 0 10px;  
+    color: var(--white-color); 
+    font-size: 14px;  
+  }
+
