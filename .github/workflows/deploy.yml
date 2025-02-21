@@ -1,5 +1,5 @@
 name: CI/CD Pipeline for Angular App
-
+# Déclencher le pipeline CI/CD sur les événements de push et de pull request sur la branche main
 on:
   push:
     branches:
@@ -8,66 +8,72 @@ on:
     branches:
       - main
 
+# Définition des jobs
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Utiliser une image Ubuntu pour exécuter les jobs
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout repository # Récupérer le code source du dépôt
+        uses: actions/checkout@v2 # Utiliser l'action checkout@v2 pour récupérer le code source
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx # Configurer Docker Buildx pour les builds multiplateformes
+        uses: docker/setup-buildx-action@v1 # Utiliser l'action setup-buildx-action@v1 pour configurer Docker Buildx
 
-      - name: Cache Docker layers
-        uses: actions/cache@v3
+      - name: Cache Docker layers # Utiliser le cache pour accélérer les builds Docker
+        uses: actions/cache@v3 # Utiliser l'action cache@v3 pour gérer le cache
         with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          path: /tmp/.buildx-cache # Spécifier le chemin du cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }} # Clé du cache basée sur l'OS et le SHA du commit
+          # Restaurer le cache si disponible
           restore-keys: |
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-buildx- 
 
-      - name: Build Docker image
+      - name: Build Docker image # Construire l'image Docker
+        # Construire l'image Docker avec le tag "jeuxolympiques"
         run: |
-          docker build -t jeuxolympiques .
+          docker build -t jeuxolympiques . 
 
-      - name: Save Docker image as tarball
+      - name: Save Docker image as tarball # Sauvegarder l'image Docker en tant que fichier tar
+        # Sauvegarder l'image Docker dans un fichier tar "jeuxolympiques.tar"
         run: |
           docker save -o jeuxolympiques.tar jeuxolympiques
 
-      - name: Upload Docker image tarball as artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload Docker image tarball as artifact # Télécharger le fichier tar de l'image Docker
+        uses: actions/upload-artifact@v4 # Utiliser l'action upload-artifact@v4 pour télécharger l'artefact
         with:
-          name: jeuxolympiques
-          path: jeuxolympiques.tar
+          name: jeuxolympiques # Nom de l'artefact
+          path: jeuxolympiques.tar # Chemin du fichier tar de l'image Docker
 
+  # Déployer l'image Docker sur une instance Lightsail
   deploy:
-    runs-on: ubuntu-latest
-    needs: build
+    runs-on: ubuntu-latest # Utiliser une image Ubuntu pour exécuter les jobs
+    needs: build # Dépendre du job "build" pour récupérer l'image Docker
     steps:
-      - name: Download Docker image tarball artifact
-        uses: actions/download-artifact@v4
+      - name: Download Docker image tarball artifact # Télécharger le fichier tar de l'image Docker
+        uses: actions/download-artifact@v4 # Utiliser l'action download-artifact@v4 pour télécharger l'artefact
         with:
-          name: jeuxolympiques
+          name: jeuxolympiques # Nom de l'artefact
 
 
-      - name: SCP Docker image to Lightsail instance
-        uses: appleboy/scp-action@v0.1.7
+      - name: SCP Docker image to Lightsail instance # Copier le fichier tar de l'image Docker sur l'instance Lightsail
+        uses: appleboy/scp-action@v0.1.7 # Utiliser l'action scp-action@v0.1.7 pour copier des fichiers via SCP
+        with:
+          host: ${{ secrets.LIGHTSAIL_HOST }} # Récupérer l'adresse IP de l'instance Lightsail depuis les secrets
+          username: ${{ secrets.LIGHTSAIL_USERNAME }} # Récupérer le nom d'utilisateur de l'instance Lightsail depuis les secrets
+          key: ${{ secrets.LIGHTSAIL_PRIVATE_KEY }} # Récupérer la clé privée de l'instance Lightsail depuis les secrets
+          source: jeuxolympiques.tar # Fichier source à copier
+          target: /home/ubuntu # Répertoire cible sur l'instance Lightsail
+          ssh_options: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v" # Options SSH pour éviter les vérifications
+
+      - name: SSH to Lightsail and load Docker image # Se connecter à l'instance Lightsail et charger l'image Docker
+        uses: appleboy/ssh-action@v0.1.7 # Utiliser l'action ssh-action@v0.1.7 pour exécuter des commandes SSH
         with:
           host: ${{ secrets.LIGHTSAIL_HOST }}
           username: ${{ secrets.LIGHTSAIL_USERNAME }}
           key: ${{ secrets.LIGHTSAIL_PRIVATE_KEY }}
-          source: jeuxolympiques.tar
-          target: /home/ubuntu
           ssh_options: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v"
-
-      - name: SSH to Lightsail and load Docker image
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.LIGHTSAIL_HOST }}
-          username: ${{ secrets.LIGHTSAIL_USERNAME }}
-          key: ${{ secrets.LIGHTSAIL_PRIVATE_KEY }}
-          ssh_options: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v"
+          # Vérifier le fichier tar et charger l'image Docker
           script: |
             ls -l /home/ubuntu/jeuxolympiques.tar
             file /home/ubuntu/jeuxolympiques.tar
@@ -75,7 +81,7 @@ jobs:
               echo "Erreur : le fichier jeuxolympiques.tar n'est pas un fichier valide."
               exit 1
             fi
-            docker load -i /home/ubuntu/jeuxolympiques.tar
+            docker load -i /home/ubuntu/jeuxolympiques.tar 
             docker stop jeuxolympiques || true
             docker rm jeuxolympiques || true
             docker run -d --name jeuxolympiques -p 80:80 jeuxolympiques
