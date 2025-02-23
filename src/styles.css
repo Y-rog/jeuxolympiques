@@ -10,11 +10,50 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --primary-color: #243364;
     --secondary-color: #F2ABCB;
     --tertiary-color: #DBC57B;
+    --quaternary-color: #1795D0;
     --white-color: #ffffff;
 }
 
 h1 {
     text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }  
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    
+}
+
+h4 {
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+/*Personnalisation des boutons*/
+.custom-button {
+    background-color: var(--quaternary-color)!important;
+    color: var(--white-color)!important;
+    border: var(--white-color) 1px solid !important;
+}
+
+.custom-button:hover {
+    background-color: var(--secondary-color)!important;
+    color: var(--white-color)!important;
+    border: var(--white-color) 1px solid!important;
+}
 
 
