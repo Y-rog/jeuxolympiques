@@ -1,5 +1,41 @@
 <app-hero-scene [title]="title" [subtitle]="subtitle">
 </app-hero-scene>
 <section class="introduction">
-    <button mat-flat-button class="custom-button" routerLink="/Offers" routerLinkActive="active">Réserver vox billets</button>
+    <button mat-flat-button class="custom-button" routerLink="/offers" routerLinkActive="active">Réserver vox billets</button>
+    <div class="introduction-banner">
+        <p class="introduction-text"> Du 26 juillet au 11 août 2024, plus de 10 000 athlètes venus des quatre coins du monde s'affronteront dans 32 sports et 329 épreuves. </p>
+    </div>
+</section>
+<section class="experience">
+    <h2 class="experience-title">Une expérience unique !</h2>
+    <div class="experience-container">
+        <img class="experience-image" src="assets/img/olympics-games-paris.jpg" alt="Monuments parisiens accueillant les jeux Olympiques Paris 2024">
+         <div class="experience-text">
+            <p>Les compétitions se dérouleront dans des lieux emblématiques à travers la capitale, créant ainsi une expérience unique pour les athlètes et les spectateurs. Paris 2024 mettra en valeur la diversité du sport mondial, offrant des épreuves pour tous les goûts et toutes les passions, dans un cadre exceptionnel.</p>
+        </div>
+    </div>
+</section>
+<section class="events">
+    <h2 class="events-title">Les épreuves</h2>
+    <div class="events-container">
+        <div class="event">
+            <img class="event-image" src="assets/img/rugby.jpg" alt="Rugby">
+            <h3 class="event-title">Rugby</h3>
+            <p class="event-text">Le rugby est un sport spectaculaire des Jeux Olympiques. Les épreuves se dérouleront dans le stade de rugby de Paris, où les équipes s'affronteront dans des matchs intenses, offrant un spectacle inoubliable aux spectateurs.</p>
+        </div>
+        <div class="event">
+            <img class="event-image" src="assets/img/bmx.jpg" alt="BMX">
+            <h3 class="event-title">BMX</h3>
+            <p class="event-text">Le BMX est un sport spectaculaire des Jeux Olympiques. Les épreuves se dérouleront sur un parcours spécialement aménagé pour l'occasion, où les coureurs s'affronteront dans des courses endiablées.</p>
+        </div>
+        <div class="event">
+            <img class="event-image" src="assets/img/basketball.jpg" alt="Basketball">
+            <h3 class="event-title">Basketball</h3>
+            <p class="event-text">Le basketball est un sport spectaculaire des Jeux Olympiques. Les épreuves se dérouleront dans la salle de basket de Paris, où les équipes s'affronteront dans des matchs intenses, offrant un spectacle inoubliable aux spectateurs.</p>
+        </div>
+    </div>
+</section>
+<section class="register">
+    <h2 class="register-title">Réservez vos billets dès maintenant !</h2>
+    <button mat-flat-button class="custom-button" routerLink="/offers" routerLinkActive="active">Réserver vos billets</button>
 </section>

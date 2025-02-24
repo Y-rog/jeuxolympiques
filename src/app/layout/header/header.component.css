@@ -5,8 +5,21 @@
     color: var(--white-color);
     padding: 0 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    text-align: center;
+}
+
+.nav-link {
+    width: 33.33%;
+}
+
+.nav-link-left {
+    text-align: left;
+}
+
+.nav-link-right {
+    text-align: right;
 }
 
 /*Liens au centre de la barre de navigation*/
