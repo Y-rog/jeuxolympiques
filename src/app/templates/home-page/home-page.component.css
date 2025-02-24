@@ -1,3 +1,111 @@
+/* Home Page
+ Section: Introduction*/
 .introduction {
   text-align: center;
+  margin-top: 35px;
+}
+
+.introduction-banner {
+  background-color: var(--tertiary-color);
+  margin-top: 35px;
+  width: 100%;
+  height: 81px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white-color);
+}
+
+/* Home Page
+ Section: Experience*/
+.experience-title {
+  text-align: center;
+  margin-top: 60px;
+  color: var(--primary-color);
+}
+
+.experience-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-top: 50px;
+  color: var(--primary-color);
+}
+
+.experience-image {
+  width: 568px;
+  height: 449px;
+  object-fit: cover;
+  opacity: 0.9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.experience-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 568px;
+  height: 449px;
+  text-align: center;
+  padding: 0 35px;
+}
+
+/* Home Page
+ Section: Events*/
+.events {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 70px;
+  color: var(--white-color);
+  background: linear-gradient(to right, var(--tertiary-color), var(--secondary-color));
+}
+
+.events-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  color: var(--primary-color);
+}
+
+.event {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 35px 60px;
+  color: var(--white-color);
+}
+
+.event-image {
+  height: 300px;
+  width: 280px;
+  opacity: 0.9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+.event-text {
+  height: 150px;
+  width: 280px;
+  text-align: center;
+}
+
+/* Home Page
+ Section: Register*/
+.register {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.register-title {
+  margin-top: 60px;
+  padding-bottom: 10px;
+  color: var(--primary-color);
 }
