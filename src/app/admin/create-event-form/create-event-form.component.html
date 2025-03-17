@@ -1,0 +1,60 @@
+<div class="form-container">
+  <!-- Affiche un message d'erreur si la création de l'élément a échoué -->
+  <div *ngIf="errorMessage" class="form-error" role="alert">
+    {{ errorMessage }}
+  </div>
+  <!-- Affiche un message de succès si la création de l'élément a réussi -->
+  <div *ngIf="successMessage" class="form-success" role="status">
+    {{ successMessage }}
+  </div>
+  <!-- Formulaire de création d'un événement -->
+  <h2>Créer un événement</h2>
+  <form [formGroup]="createEventForm" (ngSubmit)="onSubmit()">
+    
+    <mat-form-field class="form-group">
+      <label for="eventTitle">Titre</label>
+      <input matInput id="eventTitle" formControlName="eventTitle" type="text" class="form-control" />
+      <!-- Message d'erreur si le champ est obligatoire mais non rempli -->
+      <mat-error *ngIf="createEventForm.get('eventTitle')?.hasError('required') && createEventForm.get('eventTitle')?.touched">
+        Le titre est obligatoire.
+      </mat-error>
+      <!-- Message d'erreur si la longueur du titre dépasse 50 caractères -->
+      <mat-error *ngIf="createEventForm.get('eventTitle')?.hasError('maxlength') && createEventForm.get('eventTitle')?.touched">
+      Le titre doit contenir maximum 50 caractères.
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="form-group">
+      <label for="eventDescription">Description</label>
+      <textarea matInput id="eventDescription" formControlName="eventDescription" class="form-control"></textarea>
+      <mat-error *ngIf="createEventForm.get('eventDescription')?.hasError('required') && createEventForm.get('eventDescription')?.touched">
+        La description est obligatoire.
+      </mat-error>
+      <mat-error *ngIf="createEventForm.get('eventDescription')?.hasError('maxlength') && createEventForm.get('eventDescription')?.touched">
+        La description doit contenir maximum 500 caractères.
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="form-group">
+      <label for="eventLocation">Lieu</label>
+      <input matInput id="eventLocation" formControlName="eventLocation" type="text" class="form-control" />
+      <mat-error *ngIf="createEventForm.get('eventLocation')?.hasError('required') && createEventForm.get('eventLocation')?.touched">
+        Le lieu est obligatoire.
+      </mat-error>
+      <mat-error *ngIf="createEventForm.get('eventLocation')?.hasError('maxlength') && createEventForm.get('eventLocation')?.touched">
+        Le lieu doit contenir maximum 50 caractères.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
+      <mat-label>Date et heure</mat-label>
+      <input matInput type="datetime-local" formControlName="eventDateTime" class="form-control" />
+      <mat-error *ngIf="createEventForm.get('eventDateTime')?.hasError('required') && createEventForm.get('eventDateTime')?.touched">
+        La date et l'heure sont obligatoires.
+      </mat-error>
+    </mat-form-field>
+    
+    <button mat-flat-button class="custom-button" type="submit" [disabled]="!createEventForm.valid">Créer l'événement</button>
+  </form>
+</div>
+  
