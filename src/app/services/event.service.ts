@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from '../models/event.model';
@@ -7,8 +8,7 @@ import { Event } from '../models/event.model';
   providedIn: 'root'  // Ce service est disponible globalement
 })
 export class EventService {
-
-  private apiUrl = 'http://localhost:8081/api-jeuxolympiques/event';  // URL de ton API backend
+  private apiUrl = environment.apiUrl + '/event';  // URL de ton API backend
 
   constructor(private http: HttpClient) {}
 

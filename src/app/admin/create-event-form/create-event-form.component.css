@@ -5,7 +5,6 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: red;
 }
 
 form {
@@ -17,4 +16,35 @@ form {
   width: 100%;
   max-width: 600px;
   padding: 20px;
+}
+
+.form-group {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.custom-button {
+  margin-top: 20px;
+}
+
+/* Style pour le message d'erreur */
+.form-error {
+  color: red;
+  background-color: #f8d7da;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+/* Style pour le message de succès */
+.form-success {
+  color: green;
+  background-color: #d4edda;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
