@@ -1,0 +1,54 @@
+<h2 class="title">Liste des événements</h2>
+
+<section class="events-container">
+  <!-- Container de tri -->
+  <div class="sort-container">
+    <mat-form-field class="sort-field">
+      <mat-label>Trié par</mat-label>
+      <mat-select [(value)]="sortValue" (selectionChange)="onSortChange()">
+        <mat-option *ngFor="let option of sortOptions" [value]="option">
+          {{ option === 'eventDateTime' ? 'Date' : option === 'eventLocation' ? 'Lieu' : 'Titre' }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Liste des événements -->
+  <div class="events-list">
+    <table mat-table [dataSource]="eventsDataSource" class="mat-elevation-z8" matSort>
+      <!-- Colonne Titre -->
+      <ng-container matColumnDef="eventTitle">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Titre </th>
+        <td mat-cell *matCellDef="let element"> {{ element.eventTitle }} </td>
+      </ng-container>
+
+      <!-- Colonne Description -->
+      <ng-container matColumnDef="eventDescription">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{ element.eventDescription }} </td>
+      </ng-container>
+
+      <!-- Colonne Lieu -->
+      <ng-container matColumnDef="eventLocation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lieu </th>
+        <td mat-cell *matCellDef="let element"> {{ element.eventLocation }} </td>
+      </ng-container>
+
+      <!-- Colonne Date -->
+      <ng-container matColumnDef="eventDateTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let element"> {{ element.eventDateTime }} </td>
+      </ng-container>
+
+      <!-- Définition des lignes du tableau -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Pagination -->
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  </div>
+</section>
+
+
+

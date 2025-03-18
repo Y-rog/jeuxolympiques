@@ -17,4 +17,10 @@ export class EventService {
     return this.http.post<Event>(this.apiUrl, event);
   }
 
+  // Méthode pour récupérer tous les événements
+  getEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(this.apiUrl);
+  }
+
+
 }

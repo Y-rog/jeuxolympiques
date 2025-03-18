@@ -56,4 +56,18 @@ h4 {
     border: var(--white-color) 1px solid!important;
 }
 
+.custom-stroked-button {
+    background-color: var(--white-color)!important;
+    color: var(--quaternary-color)!important;
+    border: var(--quaternary-color) 1px solid !important;
+}
+
+.custom-stroked-button:hover {
+    background-color: var(--quaternary-color)!important;
+    color: var(--white-color)!important;
+    border: var(--white-color) 1px solid!important;
+}
+
+
+
 
