@@ -8,6 +8,7 @@ import { CookieManagementComponent } from './templates/legal-pages/cookie-manage
 import { CgvComponent } from './templates/legal-pages/cgv/cgv.component';
 import { AdminComponent } from './admin/admin.component';
 import { CreateEventFormComponent } from './admin/create-event-form/create-event-form.component';
+import { EventListComponent } from './admin/event-list/event-list.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {path: '', component: HomePageComponent},
     {path: 'admin', component: AdminComponent},
     {path: 'admin/create-event', component: CreateEventFormComponent},
+    {path: 'admin/event-list', component: EventListComponent}
 ];
 
 
