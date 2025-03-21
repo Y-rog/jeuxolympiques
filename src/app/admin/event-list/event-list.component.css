@@ -4,4 +4,9 @@
   margin: 20px auto 0;
 }
 
+.icon-button {
+  margin-right: 10px;
+  color: var(--primary-color);
+}
+
   

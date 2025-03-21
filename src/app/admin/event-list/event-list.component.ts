@@ -9,16 +9,17 @@ import { EventService } from '../../services/event.service';
 import { Event } from '../../models/event.model';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-event-list',
-  imports: [MatSelectModule, MatTableModule, MatSortModule, MatPaginatorModule, CommonModule],
+  imports: [MatSelectModule, MatTableModule, MatSortModule, MatPaginatorModule, CommonModule, MatIconModule],
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit {
   eventsDataSource: MatTableDataSource<Event> = new MatTableDataSource<Event>();
-  displayedColumns: string[] = ['eventTitle', 'eventDescription', 'eventLocation', 'eventDateTime'];
+  displayedColumns: string[] = ['eventTitle', 'eventDescription', 'eventLocation', 'eventDateTime', 'actions'];
 
   sortValue: string = 'eventDateTime'; // Valeur par défaut du tri
   sortOptions: string[] = ['eventDateTime', 'eventLocation', 'eventTitle'];
@@ -69,6 +70,16 @@ export class EventListComponent implements OnInit {
 
     // Appliquer le tri
     this.eventsDataSource.sort = this.sort;
+  }
+
+  // Méthode pour modifier un événement
+  editEvent(event: Event): void {
+    console.log('Edit event:', event);
+  }
+
+  // Méthode pour supprimer un événement
+  deleteEvent(event: Event): void {
+    console.log('Delete event:', event);
   }
 }
 
