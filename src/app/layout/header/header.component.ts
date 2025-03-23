@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   isAdmin: boolean = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Écouter les changements de route

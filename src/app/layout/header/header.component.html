@@ -1,43 +1,41 @@
-<header [ngClass]="{'admin-header': isAdmin, 'user-header': !isAdmin}">
-    <nav class="nav-bar" [ngClass]="{'vertical-nav': isAdmin, 'horizontal-nav': !isAdmin}">
+<header>
+  <nav [ngClass]="{'vertical-nav': isAdmin, 'horizontal-nav': !isAdmin}">
       
-      <!-- Barre de navigation pour les utilisateurs classiques -->
-      <div *ngIf="!isAdmin" class="nav-link">
-        <div class="nav-link-left">
-          <button mat-button routerLink="/home" routerLinkActive="active">Paris 2024</button>
-        </div>
-        <div class="nav-link-center">
-          <button mat-button routerLink="/home" routerLinkActive="active">Accueil</button>
-          <button mat-button routerLink="/offers" routerLinkActive="active">Offres</button>
-        </div>
-        <div class="nav-link-right">
-          <button mat-button routerLink="/cart" routerLinkActive="active">
-            <span class="material-symbols-outlined">shopping_cart</span>
-          </button>
-          <button mat-flat-button routerLink="/login" routerLinkActive="active">Connexion</button>
-        </div>
-      </div>
+    <!-- Barre de navigation pour les utilisateurs classiques -->
+    <div *ngIf="!isAdmin" class="nav-link-left">
+      <button mat-button routerLink="/home" routerLinkActive="active">Paris 2024</button>
+    </div>
+    <div *ngIf="!isAdmin" class="nav-link-center">
+      <button mat-button routerLink="/home" routerLinkActive="active">Accueil</button>
+      <button mat-button routerLink="/offers" routerLinkActive="active">Offres</button>
+    </div>
+    <div *ngIf="!isAdmin" class="nav-link-right">
+      <button mat-button routerLink="/cart" routerLinkActive="active">
+        <span class="material-symbols-outlined">shopping_cart</span>
+      </button>
+      <button mat-flat-button routerLink="/login" routerLinkActive="active">Connexion</button>
+    </div>
   
       <!-- Barre de navigation verticale pour l'admin -->
-      <div *ngIf="isAdmin" class="admin-nav">
-        <button mat-button routerLink="/admin/create-event" routerLinkActive="active">
+    <div *ngIf="isAdmin">
+      <button class="vertical-nav-button" mat-button routerLink="/admin/create-event" routerLinkActive="active">
           Créer un événement
-        </button>
-        <button mat-button routerLink="/admin/event-list" routerLinkActive="active">
+      </button>
+      <button class="vertical-nav-button" mat-button routerLink="/admin/event-list" routerLinkActive="active">
           Gérer les événements
-        </button>
-        <button mat-button routerLink="/admin/create-offer" routerLinkActive="active">
+      </button>
+      <button class="vertical-nav-button" mat-button routerLink="/admin/create-offer" routerLinkActive="active">
           Créer une offre
-        </button>
-        <button mat-button routerLink="/admin/offer-list" routerLinkActive="active">
+      </button>
+      <button class="vertical-nav-button" mat-button routerLink="/admin/offer-list" routerLinkActive="active">
           Gérer les offres
-        </button>
-        <button mat-button routerLinkActive="active">
+      </button>
+      <button class="vertical-nav-button" mat-button routerLinkActive="active">
             Quitter
-            <mat-icon>exit_to_app</mat-icon>
-          </button>
-      </div>
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </div>
   
-    </nav>
-  </header>
+  </nav>
+</header>
   

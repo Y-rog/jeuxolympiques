@@ -1,11 +1,11 @@
 /* Barre de navigation de base (horizontal) */
-.nav-bar {
+.horizontal-nav{
     background-color: var(--primary-color);
     height: 60px;
     color: var(--white-color);
-    padding: 0 20px;
+    padding: 0 100px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
 }
@@ -53,45 +53,31 @@
     height: 100%;
     background-color: var(--primary-color);
     color: var(--white-color);
-    padding-top: 20px;
+    padding-top: 100px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.admin-nav {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 20px;
-}
-
-.admin-nav button {
-    width: 100%;
-    margin-bottom: 15px;
-    text-align: left;
 }
 
 /* Styles pour les boutons */
 button {
-    width: 100%;
     padding: 10px;
     margin: 5px 0;
     text-align: left;
 }
 
 /* Spécifique pour les boutons sur le côté admin */
-.admin-nav button.mat-mdc-unelevated-button:not(:disabled) {
+.vertical-nav button.mat-mdc-unelevated-button:not(:disabled) {
     background-color: var(--primary-color);
     color: var(--white-color);
     border: var(--white-color) 1px solid;
 }
 
-.admin-nav button.mat-mdc-unelevated-button:not(:disabled):hover {
+.vertical-nav button.mat-mdc-unelevated-button:not(:disabled):hover {
     background-color: var(--tertiary-color);
     color: var(--primary-color);
     border: var(--tertiary-color) 1px solid;
 }
 
-.admin-nav button mat-icon {
-    font-size: 20px; 
+.vertical-nav-button {
+    width: 100%;
+    margin-bottom: 15px;
 }
-
-
