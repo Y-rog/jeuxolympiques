@@ -1,11 +1,11 @@
-/*Barre de navigation*/
-.nav-bar {
+/* Barre de navigation de base (horizontal) */
+.horizontal-nav{
     background-color: var(--primary-color);
     height: 60px;
     color: var(--white-color);
-    padding: 0 20px;
+    padding: 0 100px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
 }
@@ -22,19 +22,17 @@
     text-align: right;
 }
 
-/*Liens au centre de la barre de navigation*/
 .nav-link-center {
     padding: 0 20px;
 }
 
-/*Personnalisation des liens de la barre de navigation*/
+/* Personnalisation des liens de la barre de navigation */
 .mat-mdc-unelevated-button:not(:disabled) {
     background-color: var(--primary-color);
     color: var(--white-color);
     border: var(--white-color) 1px solid;
 }
 
-/*Personnalisation du bouton de connexion de la barre de navigation*/
 .mat-mdc-unelevated-button:not(:disabled):hover {
     background-color: var(--tertiary-color);
     color: var(--primary-color);
@@ -45,3 +43,41 @@
     color: var(--white-color);
 }
 
+/* Barre de navigation verticale (admin) */
+.vertical-nav {
+    display: block;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 250px; 
+    height: 100%;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding-top: 100px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles pour les boutons */
+button {
+    padding: 10px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+/* Spécifique pour les boutons sur le côté admin */
+.vertical-nav button.mat-mdc-unelevated-button:not(:disabled) {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: var(--white-color) 1px solid;
+}
+
+.vertical-nav button.mat-mdc-unelevated-button:not(:disabled):hover {
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+    border: var(--tertiary-color) 1px solid;
+}
+
+.vertical-nav-button {
+    width: 100%;
+    margin-bottom: 15px;
+}
