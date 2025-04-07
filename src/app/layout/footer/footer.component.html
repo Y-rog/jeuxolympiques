@@ -1,4 +1,4 @@
-<footer class="footer-container">
+<footer *ngIf="!isAdmin" class="footer-container">
     <div class="top-container">
         <div class="left-container">
             <button mat-button routerLink="/home" routerLinkActive="active">Paris 2024</button>

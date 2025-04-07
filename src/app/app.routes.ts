@@ -21,9 +21,9 @@ export const routes: Routes = [
     {path: 'cookie-management', component: CookieManagementComponent},
     {path: 'cgv', component: CgvComponent},
     {path: '', component: HomePageComponent},
-    {path: 'admin', component: AdminComponent, canActivate: [adminGuard], data: { expectedRole: 'ADMIN' }}, 
+    {path: 'admin', component: AdminComponent, canActivate: [adminGuard]}, 
     {path: 'admin/create-event', component: CreateEventFormComponent, canActivate: [adminGuard]},
-    {path: 'admin/event-list', component: EventListComponent, canActivate: [adminGuard], data: { expectedRole: 'ADMIN' }},
+    {path: 'admin/event-list', component: EventListComponent, canActivate: [adminGuard]},
 ];
 
 

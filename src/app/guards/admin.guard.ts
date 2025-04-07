@@ -10,7 +10,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
   if (authService.isAuthenticated()) {
     // Vérifier si l'utilisateur a un rôle d'admin
     const roles = authService.getRolesFromToken();
-    console.log('Roles de l\'utilisateur:', roles);  // Afficher les rôles dans la console pour le débogage
+    // Si l'utilisateur a le rôle ADMIN, autoriser l'accès
     if (roles.includes('ADMIN')) {
       return true; 
     } else {
