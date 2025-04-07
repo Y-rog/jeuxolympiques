@@ -30,10 +30,15 @@ export class HeaderComponent implements OnInit {
     this.checkIfAdmin();
   }
 
-  // Fonction pour vérifier si on est dans l'espace admin
+  // Fonction pour vérifier si on est dans l'espace admin et si l'utilisateur a le rôle admin
   private checkIfAdmin(): void {
-    // Exemple : Si l'URL commence par '/admin', on considère que l'utilisateur est dans l'espace admin
-    this.isAdmin = this.router.url.startsWith('/admin');
+    const currentUrl = this.router.url;
+    const isAdminRoute = currentUrl.includes('/admin');
+    
+    // Vérifier si l'utilisateur a le rôle admin dans le cookie grace au signal
+    const userRole = this.router.getCurrentNavigation()?.extras.state?.['userRole'] || 'user'; // Remplacez par la logique pour obtenir le rôle de l'utilisateur
+
+    this.isAdmin = isAdminRoute && userRole === 'admin';
   }
   
 }
