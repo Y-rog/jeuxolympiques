@@ -20,14 +20,11 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
-<<<<<<< HEAD
     "espress": "^0.0.0",
     "express": "^4.21.2",
-=======
     "@auth0/angular-jwt": "^5.2.0",
     "@types/jwt-decode": "^2.2.1",
     "jwt-decode": "^4.0.0",
->>>>>>> develop
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
