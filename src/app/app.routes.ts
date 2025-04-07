@@ -11,12 +11,14 @@ import { CreateEventFormComponent } from './admin/create-event-form/create-event
 import { EventListComponent } from './admin/event-list/event-list.component';
 import { adminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard'; 
+import { RegistrationComponent } from './auth/registration/registration.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
     {path: 'offers', component: OffersPageComponent},
     {path: 'cart', component: CartPageComponent}, 
     {path: 'login', component: LoginComponent},
+    {path: 'register', component: RegistrationComponent},
     {path: 'policy-confidantiality', component: PolicyConfidantialityComponent},
     {path: 'cookie-management', component: CookieManagementComponent},
     {path: 'cgv', component: CgvComponent},

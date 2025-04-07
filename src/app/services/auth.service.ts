@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { JwtResponse } from '../models/jwt-response.model';
 import { LoginRequest } from '../models/login-request.model';
 import { jwtDecode } from 'jwt-decode';
+import { RegisterRequest } from '../models/register-request.model';
 import { MyJwtPayload } from '../models/jwt-payload.interface';
 import { environment } from '../../environments/environment';
 
@@ -18,6 +19,10 @@ export class AuthService {
 
   login(loginRequest: LoginRequest): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.authUrl, loginRequest);
+  }
+
+  register(registerRequest: RegisterRequest): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/auth/register`, registerRequest);
   }
 
   isAuthenticated(): boolean {
