@@ -1,0 +1,35 @@
+<div class="form-container">
+    <!-- Affiche un message d'erreur si l'authentification a échoué -->
+    <div *ngIf="errorMessage" class="form-error" role="alert">
+      {{ errorMessage }}
+    </div>
+    <!-- Formulaire de connexion -->
+    <h2>Se connecter</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Champ Email -->
+      <mat-form-field class="form-group">
+        <label for="email">Email</label>
+        <input matInput id="username" formControlName="username" type="email" class="form-control" />
+        <mat-error *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">
+          L'email est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('username')?.hasError('email') && loginForm.get('username')?.touched">
+          L'email n'est pas valide.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Champ Mot de passe -->
+      <mat-form-field class="form-group">
+        <label for="password">Mot de passe</label>
+        <input matInput id="password" formControlName="password" type="password" class="form-control" />
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+          Le mot de passe est obligatoire.
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-flat-button class="custom-button" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+    </form>
+  </div>
+  
+  

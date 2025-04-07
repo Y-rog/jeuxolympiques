@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLinkActive, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { filter } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit {
 
+  private authService = inject(AuthService);
   isAdmin: boolean = false;
 
   constructor(private router: Router) {}
@@ -30,10 +32,17 @@ export class HeaderComponent implements OnInit {
     this.checkIfAdmin();
   }
 
-  // Fonction pour vérifier si on est dans l'espace admin
+  // Fonction pour vérifier si on est dans l'espace admin 
   private checkIfAdmin(): void {
-    // Exemple : Si l'URL commence par '/admin', on considère que l'utilisateur est dans l'espace admin
-    this.isAdmin = this.router.url.startsWith('/admin');
+    const currentUrl = this.router.url;
+    const isAdminRoute = currentUrl.includes('/admin');
+    
+    // Vérifier si l'utilisateur a le rôle admin grace au token JWT
+    const token = this.authService.getRolesFromToken();
+    const userRoles = [...token];
+    const userRole = userRoles.find(role => role === 'ADMIN') || null;
+    
+    this.isAdmin = isAdminRoute && userRole === 'ADMIN';
   }
   
 }
