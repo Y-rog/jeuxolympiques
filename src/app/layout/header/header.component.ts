@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
 
   private authService = inject(AuthService);
   isAdmin: boolean = false;
+  isLoggedIn: boolean = false; // Variable pour vérifier si l'utilisateur est connecté
 
   constructor(private router: Router) {}
 
@@ -26,10 +27,14 @@ export class HeaderComponent implements OnInit {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.checkIfAdmin();
+        this.checkIfLoggedIn();
       });
 
     // Vérifier au démarrage si l'utilisateur est dans l'espace admin
     this.checkIfAdmin();
+
+    // Vérifier au démarrage si l'utilisateur est connecté
+    this.checkIfLoggedIn();
   }
 
   // Fonction pour vérifier si on est dans l'espace admin 
@@ -44,5 +49,27 @@ export class HeaderComponent implements OnInit {
     
     this.isAdmin = isAdminRoute && userRole === 'ADMIN';
   }
+
+  checkIfLoggedIn(): void {
+    // Vérifier si l'utilisateur est connecté
+    if (this.authService.isAuthenticated()) {
+      this.isLoggedIn = true;
+    }
+    else {
+      this.isLoggedIn = false;
+    }
+  }
+
+
+  logout() {
+    // Appeler le service d'authentification pour se déconnecter
+    this.authService.logout();  
+    // Réinitialiser les variables d'état
+    this.isAdmin = false;
+    this.isLoggedIn = false;
+    this.router.navigate(['/home']);  // Rediriger l'utilisateur vers la page d'accueil
+  }
+
+
   
 }
