@@ -1,0 +1,67 @@
+<div class="form-container">
+    <div *ngIf="errorMessage" class="form-error" role="alert">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="form-success" role="status">
+      {{ successMessage }}
+    </div>
+  
+    <h2>Modifier un événement</h2>
+  
+    <form [formGroup]="updateEventForm" (ngSubmit)="onSubmit()">
+  
+      <mat-form-field class="form-group">
+        <mat-label>Titre</mat-label>
+        <input matInput formControlName="eventTitle" placeholder="Ex : Conférence IA 2025" />
+        <mat-error *ngIf="updateEventForm.get('eventTitle')?.hasError('required') && updateEventForm.get('eventTitle')?.touched">
+          Le titre est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="updateEventForm.get('eventTitle')?.hasError('maxlength')">
+          Le titre doit contenir maximum 50 caractères.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-group">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="eventDescription" placeholder="Ex : Une journée dédiée aux dernières innovations en IA..."></textarea>
+        <mat-error *ngIf="updateEventForm.get('eventDescription')?.hasError('required') && updateEventForm.get('eventDescription')?.touched">
+          La description est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="updateEventForm.get('eventDescription')?.hasError('maxlength')">
+          La description doit contenir maximum 500 caractères.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-group">
+        <mat-label>Lieu</mat-label>
+        <input matInput formControlName="eventLocation" placeholder="Ex : Centre de conférences - Lyon" />
+        <mat-error *ngIf="updateEventForm.get('eventLocation')?.hasError('required') && updateEventForm.get('eventLocation')?.touched">
+          Le lieu est obligatoire.
+        </mat-error>
+        <mat-error *ngIf="updateEventForm.get('eventLocation')?.hasError('maxlength')">
+          Le lieu doit contenir maximum 50 caractères.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-group">
+        <mat-label>Nombre de places</mat-label>
+        <input matInput type="number" formControlName="eventPlacesNumber" placeholder="Ex : 150" />
+        <mat-error *ngIf="updateEventForm.get('eventPlacesNumber')?.hasError('required') && updateEventForm.get('eventPlacesNumber')?.touched">
+          Le nombre de places est obligatoire.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-group">
+        <mat-label>Date et heure</mat-label>
+        <input matInput type="datetime-local" formControlName="eventDateTime" placeholder="Ex : 2025-06-15T14:00" />
+        <mat-error *ngIf="updateEventForm.get('eventDateTime')?.hasError('required') && updateEventForm.get('eventDateTime')?.touched">
+          La date et l'heure sont obligatoires.
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-flat-button color="primary" class="custom-button" type="submit" [disabled]="!updateEventForm.valid">
+        Mettre à jour l'événement
+      </button>
+    </form>
+  </div>
+  

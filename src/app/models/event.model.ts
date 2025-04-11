@@ -1,11 +1,11 @@
 // src/app/models/event.model.ts
 export class Event {
-    constructor(
-      public eventTitle: string,
-      public eventDescription: string,
-      public eventLocation: string,
-      public eventPlacesNumber: number,
-      public eventDateTime: Date
-    ) {}   
+    // Propriétés de l'événement
+    eventTitle!: string;
+    eventDescription!: string;
+    eventLocation!: string;
+    eventPlacesNumber!: number;
+    eventDateTime!: Date;
+    eventId?: number; // ID de l'événement, optionnel pour la création
   }
   

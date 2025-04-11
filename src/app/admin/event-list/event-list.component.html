@@ -1,21 +1,16 @@
 <h2 class="title">Liste des événements</h2>
 
 <section class="events-container">
-  <!-- Container de tri -->
-  <div class="sort-container">
-    <mat-form-field class="sort-field">
-      <mat-label>Trié par</mat-label>
-      <mat-select [(value)]="sortValue" (selectionChange)="onSortChange()">
-        <mat-option *ngFor="let option of sortOptions" [value]="option">
-          {{ option === 'eventDateTime' ? 'Date' : option === 'eventLocation' ? 'Lieu' : 'Titre' }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
 
   <!-- Liste des événements -->
   <div class="events-list">
     <table mat-table [dataSource]="eventsDataSource" class="mat-elevation-z8" matSort>
+      <!-- Colonne ID à masquer -->
+      <ng-container matColumnDef="eventId" *ngIf="false">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{ element.eventId }} </td>
+      </ng-container>
+
       <!-- Colonne Titre -->
       <ng-container matColumnDef="eventTitle">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Titre </th>
@@ -37,13 +32,19 @@
       <!-- Colonne Date -->
       <ng-container matColumnDef="eventDateTime">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-        <td mat-cell *matCellDef="let element"> {{ element.eventDateTime }} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.eventDateTime | date:'dd/MM/yyyy HH:mm' }} </td>
+      </ng-container>
+
+      <!-- Colonne Nombre de places -->
+      <ng-container matColumnDef="eventPlacesNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de places </th>
+        <td mat-cell *matCellDef="let element"> {{ element.eventPlacesNumber }} </td>
       </ng-container>
 
       <!-- Colonne Actions -->
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element">
+        <td class="button-container" mat-cell *matCellDef="let element">
           <button class="icon-button" mat-icon-button (click)="editEvent(element)">
             <mat-icon>edit</mat-icon>
           </button>

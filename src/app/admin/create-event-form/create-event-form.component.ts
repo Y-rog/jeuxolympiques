@@ -34,6 +34,7 @@ export class CreateEventFormComponent {
       eventTitle: ['', [Validators.required, Validators.maxLength(50)]],
       eventDescription: ['', [Validators.required, Validators.maxLength(500)]],
       eventLocation: ['', [Validators.required, Validators.maxLength(50)]],
+      eventPlacesNumber: ['', [Validators.required, Validators.min(1), Validators.max(1000000)]],
       eventDateTime: ['', [Validators.required]]
     });
   }
@@ -42,7 +43,7 @@ export class CreateEventFormComponent {
     if (this.createEventForm.valid) {
       let formData = this.createEventForm.value;
   
-      // Convertir la date en format 'yyyy-MM-dd HH:mm' pour le backend
+      // Convertir la date en format 'dd/MM/yyyy HH:mm' pour le backend
       let eventDateTime = new Date(formData.eventDateTime);
       formData.eventDateTime = eventDateTime;
   
@@ -51,13 +52,18 @@ export class CreateEventFormComponent {
   
       const newEvent: Event = formData;
   
-      // Utiliser pipe() pour gérer la réponse de l'API
       this.eventService.createEvent(newEvent).pipe(
-        tap((response) => {
-          // Message de succès en cas de création réussie
+        tap(() => {
           this.successMessage = `L'événement ${newEvent.eventTitle} a bien été créé !`;
-          this.errorMessage = null;  // Réinitialiser le message d'erreur
-          this.createEventForm.reset();  // Réinitialiser le formulaire
+          this.errorMessage = null;
+  
+          // Réinitialiser et nettoyer le formulaire
+          this.createEventForm.reset({}, { emitEvent: false });
+          this.createEventForm.markAsPristine();
+          this.createEventForm.markAsUntouched();
+          Object.keys(this.createEventForm.controls).forEach(key => {
+            this.createEventForm.get(key)?.setErrors(null);
+          });
   
           // Masquer le message de succès après 5 secondes
           setTimeout(() => {
@@ -65,20 +71,17 @@ export class CreateEventFormComponent {
           }, 5000);
         }),
         catchError((error) => {
-          // Gérer les erreurs d'appel API
           console.error('Erreur lors de la création de l\'événement', error);
           this.errorMessage = 'Une erreur est survenue lors de la création de l\'événement. Veuillez réessayer.';
-          this.successMessage = null;  // Réinitialiser le message de succès
-  
-          // Retourner un observable vide pour ne pas interrompre le flux
-          return of(null); // Cela retourne une valeur par défaut ou un "vide"
+          this.successMessage = null;
+          return of(null);
         })
-      ).subscribe();  // Le subscribe sans action supplémentaire si nécessaire
+      ).subscribe();
     } else {
-      // Si le formulaire n'est pas valide, afficher un message d'erreur
       this.errorMessage = 'Veuillez remplir tous les champs requis.';
-      this.successMessage = null;  // Réinitialiser le message de succès
+      this.successMessage = null;
     }
   }
+  
 }
 

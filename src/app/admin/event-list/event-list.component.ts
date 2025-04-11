@@ -7,27 +7,28 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../models/event.model';
+import { Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-event-list',
-  imports: [MatSelectModule, MatTableModule, MatSortModule, MatPaginatorModule, CommonModule, MatIconModule],
+  imports: [MatSelectModule, MatTableModule, MatSortModule, MatPaginatorModule, CommonModule, MatIconModule, NgIf],
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit {
   eventsDataSource: MatTableDataSource<Event> = new MatTableDataSource<Event>();
-  displayedColumns: string[] = ['eventTitle', 'eventDescription', 'eventLocation', 'eventDateTime', 'actions'];
+  displayedColumns: string[] = ['eventTitle', 'eventDescription', 'eventLocation', 'eventDateTime', 'eventPlacesNumber', 'actions'];
 
   sortValue: string = 'eventDateTime'; // Valeur par défaut du tri
   sortOptions: string[] = ['eventDateTime', 'eventLocation', 'eventTitle'];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
     // Récupérer les événements du service
@@ -70,16 +71,19 @@ export class EventListComponent implements OnInit {
 
     // Appliquer le tri
     this.eventsDataSource.sort = this.sort;
+
   }
 
   // Méthode pour modifier un événement
   editEvent(event: Event): void {
-    console.log('Edit event:', event);
+    console.log('Modification de l\'événement :', event);
+    // Rediriger vers le formulaire de mise à jour avec l'ID de l'événement
+    this.router.navigate(['/admin/update-event', event.eventId]); // Rediriger vers le formulaire de mise à jour
   }
 
   // Méthode pour supprimer un événement
   deleteEvent(event: Event): void {
-    console.log('Delete event:', event);
+    console.log('Suppression de l\'événement :', event);
   }
 }
 
