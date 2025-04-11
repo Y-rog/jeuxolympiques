@@ -31,8 +31,11 @@ export class EventService {
 
   // Méthode pour mettre à jour un événement
   updateEvent(id: number, event: Event): Observable<Event> {
-    return this.http.put<Event>(`${this.apiUrl}/${id}/update`, event);
+    return this.http.put<Event>(`${this.apiUrl}/${id}`, event);
   }
 
-
+  deleteEventById(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+    
 }

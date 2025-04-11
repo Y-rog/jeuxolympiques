@@ -12,6 +12,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-event-list',
@@ -28,7 +31,8 @@ export class EventListComponent implements OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  constructor(private eventService: EventService, private router: Router) {}
+
+  constructor(private eventService: EventService, private router: Router, public dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     // Récupérer les événements du service
@@ -50,7 +54,7 @@ export class EventListComponent implements OnInit {
   // Appliquer le tri basé sur la valeur de sortValue
   private applySort(): void {
     const sortHeader = this.sortValue;
-    
+
     // Vérifier le critère de tri et appliquer le bon ordre
     this.eventsDataSource.sortingDataAccessor = (data: Event, header: string) => {
       switch (header) {
@@ -64,14 +68,13 @@ export class EventListComponent implements OnInit {
           return (data as any)[header];
       }
     };
-    
+
     // Réinitialiser le tri
     this.sort.active = sortHeader;
     this.sort.direction = 'asc'; // Par défaut, tri croissant
 
     // Appliquer le tri
     this.eventsDataSource.sort = this.sort;
-
   }
 
   // Méthode pour modifier un événement
@@ -81,11 +84,41 @@ export class EventListComponent implements OnInit {
     this.router.navigate(['/admin/update-event', event.eventId]); // Rediriger vers le formulaire de mise à jour
   }
 
+  // Ouvrir la modal de confirmation de suppression
+  openDeleteDialog(event: Event): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: { message: `Êtes-vous sûr de vouloir supprimer l'événement "${event.eventTitle}" ?` }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirm') {
+        this.deleteEvent(event);
+      }
+    });
+  }
+  
+  
+
   // Méthode pour supprimer un événement
   deleteEvent(event: Event): void {
-    console.log('Suppression de l\'événement :', event);
+    if (!event.eventId) {
+      this.snackBar.open('L\'événement ne peut pas être supprimé (ID invalide).', 'Fermer', { duration: 2000 });
+      return;
+    }
+    this.eventService.deleteEventById(event.eventId).subscribe({
+      next: () => {
+        this.snackBar.open('Événement supprimé!', 'Fermer', { duration: 2000 });
+        this.eventsDataSource.data = this.eventsDataSource.data.filter(e => e.eventId !== event.eventId);
+      },
+      error: () => {
+        this.snackBar.open('Erreur lors de la suppression de l\'événement.', 'Fermer', { duration: 2000 });
+      }
+    });
   }
 }
+
+
 
 
 
