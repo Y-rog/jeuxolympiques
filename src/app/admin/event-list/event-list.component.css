@@ -9,4 +9,12 @@
   color: var(--primary-color);
 }
 
+/*Aligner les boutons sans bouger les lignes du tableau*/
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
   

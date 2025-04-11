@@ -47,6 +47,14 @@
     </mat-form-field>
 
     <mat-form-field class="form-group">
+      <label for="eventPlacesNumber">Nombre de places</label>
+      <input matInput id="eventPlacesNumber" formControlName="eventPlacesNumber" type="number" class="form-control" />
+      <mat-error *ngIf="createEventForm.get('eventPlacesNumber')?.hasError('required') && createEventForm.get('eventPlacesNumber')?.touched">
+        Le nombre de places est obligatoire.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-group">
       <mat-label>Date et heure</mat-label>
       <input matInput type="datetime-local" formControlName="eventDateTime" class="form-control" />
       <mat-error *ngIf="createEventForm.get('eventDateTime')?.hasError('required') && createEventForm.get('eventDateTime')?.touched">
@@ -54,7 +62,7 @@
       </mat-error>
     </mat-form-field>
     
-    <button mat-flat-button class="custom-button" type="submit" [disabled]="!createEventForm.valid">Créer l'événement</button>
+    <button mat-flat-button class="custom-button" type="submit">Créer l'événement</button>
   </form>
 </div>
   

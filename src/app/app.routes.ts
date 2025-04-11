@@ -12,6 +12,7 @@ import { EventListComponent } from './admin/event-list/event-list.component';
 import { adminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard'; 
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { UpdateEventFormComponent } from './admin/update-event-form/update-event-form.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
@@ -26,6 +27,7 @@ export const routes: Routes = [
     {path: 'admin', component: AdminComponent, canActivate: [adminGuard]}, 
     {path: 'admin/create-event', component: CreateEventFormComponent, canActivate: [adminGuard]},
     {path: 'admin/event-list', component: EventListComponent, canActivate: [adminGuard]},
+    {path: 'admin/update-event/:id', component: UpdateEventFormComponent, canActivate: [adminGuard]},
 ];
 
 

@@ -31,6 +31,8 @@ form {
 
 /* Style pour le message d'erreur */
 .form-error {
+  display: flex;
+  justify-content: center;
   color: red;
   background-color: #f8d7da;
   width: 100%;
@@ -41,6 +43,8 @@ form {
 
 /* Style pour le message de succès */
 .form-success {
+  display: flex;
+  justify-content: center;
   color: green;
   background-color: #d4edda;
   width: 100%;
