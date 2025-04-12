@@ -31,7 +31,7 @@
       <button class="vertical-nav-button" mat-button routerLink="/admin/offer-list" routerLinkActive="active">
           Gérer les offres
       </button>
-      <button class="vertical-nav-button" mat-button routerLinkActive="active">
+      <button (click)="logout()" class="vertical-nav-button" mat-button routerLinkActive="active">
             Quitter
         <mat-icon (click)="logout()">exit_to_app</mat-icon>
       </button>
