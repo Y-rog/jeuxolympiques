@@ -1,4 +1,4 @@
 export const environment = {
-    production: false,
-    apiUrl: 'https://api-jeuxolympiques.gregoryfulgueiras.com'
+    production: true,
+    apiUrl: 'https://api-jeuxolympiques.gregoryfulgueiras.com/api-jeuxolympiques'
   };
