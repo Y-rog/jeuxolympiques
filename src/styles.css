@@ -12,6 +12,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --tertiary-color: #DBC57B;
     --quaternary-color: #1795D0;
     --white-color: #ffffff;
+    --green-color: #4CAF50;
+    --red-color: #F44336;
 }
 
 h1 {
@@ -64,6 +66,30 @@ h4 {
 
 .custom-stroked-button:hover {
     background-color: var(--quaternary-color)!important;
+    color: var(--white-color)!important;
+    border: var(--white-color) 1px solid!important;
+}
+
+/* Personnalisation des boutons de type "cancel" en orange */
+.custom-button-modal-cancel {
+    background-color: var(--tertiary-color)!important;
+    color: var(--white-color)!important;
+    border: var(--white-color) 1px solid !important;
+}
+.custom-button-modal-cancel:hover {
+    background-color: var(--tertiary-color)!important;
+    color: var(--white-color)!important;
+    border: var(--white-color) 1px solid!important;
+}
+
+/* Personnalisation des boutons de type "warn" en rouge */
+.custom-button-modal-warn {
+    background-color: var(--red-color)!important;
+    color: var(--white-color)!important;
+    border: var(--white-color) 1px solid !important;
+}
+.custom-button-modal-warn:hover {
+    background-color: var(--red-color)!important;
     color: var(--white-color)!important;
     border: var(--white-color) 1px solid!important;
 }

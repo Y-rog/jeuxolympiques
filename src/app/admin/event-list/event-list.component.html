@@ -48,7 +48,7 @@
           <button class="icon-button" mat-icon-button (click)="editEvent(element)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button class="icon-button" mat-icon-button (click)="deleteEvent(element)">
+          <button class="icon-button" mat-icon-button (click)="openDeleteDialog(element)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -63,6 +63,7 @@
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
   </div>
 </section>
+
 
 
 
