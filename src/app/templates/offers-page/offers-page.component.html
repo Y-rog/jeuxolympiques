@@ -1,1 +1,66 @@
-<p>offers-page works!</p>
+<app-hero-scene [title]="title" [subtitle]="subtitle">
+</app-hero-scene>
+<div class="container">
+<mat-form-field appearance="fill">
+    <mat-label>Filtrer par catégorie</mat-label>
+    <mat-select [(value)]="selectedCategory" (selectionChange)="applyFilter()">
+      <mat-option value="">Toutes</mat-option>
+      <mat-option *ngFor="let cat of category" [value]="cat">{{ cat }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-table [dataSource]="offers" matSort>
+
+    <!-- Titre de l'événement -->
+    <ng-container matColumnDef="eventTitle">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Événement </mat-header-cell>
+      <mat-cell *matCellDef="let offer"> {{ offer.eventTitle }} </mat-cell>
+    </ng-container>
+  
+    <!-- Date -->
+    <ng-container matColumnDef="eventDateTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+      <mat-cell *matCellDef="let offer"> {{ offer.eventDateTime | date:'dd/MM/yyyy HH:mm' }} </mat-cell>
+    </ng-container>
+  
+    <!-- Lieu -->
+    <ng-container matColumnDef="eventLocation">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Lieu </mat-header-cell>
+      <mat-cell *matCellDef="let offer"> {{ offer.eventLocation }} </mat-cell>
+    </ng-container>
+  
+    <!-- Prix -->
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prix (€) </mat-header-cell>
+      <mat-cell *matCellDef="let offer"> {{ offer.price }} </mat-cell>
+    </ng-container>
+  
+    <!-- Dispo -->
+    <ng-container matColumnDef="availability">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dispo </mat-header-cell>
+      <mat-cell *matCellDef="let offer">
+        <mat-icon color="{{ offer.availability ? 'primary' : 'warn' }}">
+          {{ offer.availability ? 'check_circle' : 'cancel' }}
+        </mat-icon>
+      </mat-cell>
+    </ng-container>
+  
+    <!-- Action -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let offer">
+        <button mat-button class="custom-button" [disabled]="!offer.availability" (click)="reserveOffer(offer)">Ajouter au panier</button>
+      </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+  </mat-table>
+  
+</div>
+
+  
+  
+  
+

@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginRequest } from '../../models/login-request.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [MatButton, MatInputModule, ReactiveFormsModule, CommonModule],
+  imports: [MatButton, MatInputModule, ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

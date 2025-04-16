@@ -1,7 +1,3 @@
-@use '@angular/material' as mat;
-
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -28,6 +24,7 @@ h2 {
     font-size: 2rem;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
+    color: var(--primary-color);
 }
 
 h3 {
