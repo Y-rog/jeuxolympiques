@@ -12,7 +12,7 @@ export class OffersService {
   constructor(private http: HttpClient) {}
 
   // Récupérer la liste des offres
-  getOffers(): Observable<any> {
+  getOffers(): Observable<Offer[]> {
     return this.http.get<Offer[]>(this.apiUrl);
   }
    

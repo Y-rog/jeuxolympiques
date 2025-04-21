@@ -1,4 +1,5 @@
 export interface Offer {
+    offerId: number | null;
     price: number;
     availability: boolean;
     eventId: number;

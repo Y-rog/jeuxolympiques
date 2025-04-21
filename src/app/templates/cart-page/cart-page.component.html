@@ -1,1 +1,39 @@
-<p>cart-page works!</p>
+<app-hero-scene [title]="title">
+</app-hero-scene>
+
+<div class="shopping-cart-container">
+  <div class="cart-items" *ngFor="let item of cartItems">
+    <mat-card class="cart-item-card">
+      <mat-card-header>
+        <mat-card-title>{{ eventNameMap.get(item.offerId)}}</mat-card-title>
+        <mat-card-subtitle>{{ offerNameMap.get(item.offerId) }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="cart-item-details">
+          <p>Quantité : {{ item.quantity }}</p>
+          <p>Prix unitaire : {{ item.priceAtPurchase | currency:'EUR':'symbol' }}</p>
+
+          <!-- Compte à rebours -->
+          <p>
+            Expire dans : 
+            <span [ngClass]="{'expired': item.isExpired}">
+              {{ item.timeRemaining | date: 'HH:mm:ss' }}
+            </span>
+          </p>
+          <div class="right-action">
+            <button mat-icon-button class="delete-button" (click)="removeItemFromCart(item.cartItemId)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="total-amount">
+    <p *ngIf="cartItems.length === 0">Votre panier est vide.</p>
+    <p *ngIf="cartItems.length > 0">Montant total : {{ totalAmount | currency:'EUR':'symbol' }}</p>
+  </div>
+</div>
+

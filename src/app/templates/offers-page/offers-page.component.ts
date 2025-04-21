@@ -12,6 +12,8 @@ import { MatOption } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { Offer } from '../../models/offer.model';
+import { CartService } from '../../services/cart.service';
+import { CartItem } from '../../models/cart-item.model';
 
 @Component({
   selector: 'app-offers-page',
@@ -39,18 +41,16 @@ export class OffersPageComponent implements AfterViewInit {
   filteredOffers: Offer[] = [];
   selectedCategory: string = '';
 
-displayedColumns: string[] = ['eventTitle', 'eventDateTime', 'eventLocation', 'price', 'availability', 'action'];
+displayedColumns: string[] = ['eventTitle', 'eventDateTime', 'eventLocation', 'price', 'availability','quantity', 'action'];
 
 // Injecter les valeurs du service dans le constructeur
-constructor(private offersService: OffersService) {
+constructor(private offersService: OffersService, private cartService: CartService) {
   this.offersService.getOffers().subscribe((data: Offer[]) => {
     this.offers.data = data;
     this.category = Array.from(new Set(data.map(offer => offer.offerCategoryTitle))); 
     this.filteredOffers = data;
   });
 }
-
-  // Removed duplicate ngAfterViewInit implementation
   
   
   // Méthode pour filtrer 
@@ -66,10 +66,35 @@ constructor(private offersService: OffersService) {
   }
   
   
-  // Méthode pour réserver une offre
-  reserveOffer(offer: Offer): void {
-    console.log('Réservation de l\'offre:', offer);
+  addToCart(offer: any): void {
+    const cartItem: CartItem = {
+      offerId: offer.offerId,
+      quantity: offer.quantity ?? 1,
+      qrcode: offer.qrcode ?? '',
+      priceAtPurchase: offer.price ?? 0,
+      cartItemId: 0,
+      addedAt: new Date(),
+      expirationTime: new Date(Date.now() + 5 * 60 * 1000),
+      isExpired: false,
+      timeRemaining: 5 * 60 * 1000
+    };
+    console.log('PAnier:', this.cartService.getCart());
+    console.log('Tentative d’ajout au panier:', cartItem);
+  
+    this.cartService.getCart().subscribe((cart) => {
+      if (!cart) {
+        this.cartService.createCart().subscribe((newCart) => {
+          this.cartService.addOfferToCart(newCart.cartId, cartItem).subscribe(() => {
+            console.log('Panier créé et offre ajoutée:', newCart.cartId, cartItem);
+          });
+        });
+      } else {
+        this.cartService.addOfferToCart(cart.cartId, cartItem).subscribe(() => {
+          console.log('Offre ajoutée au panier existant:', cart.cartId, cartItem);
+        });
+      }
+    });
   }
-
-
+  
+  
 }

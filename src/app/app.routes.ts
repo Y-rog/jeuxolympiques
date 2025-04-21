@@ -10,14 +10,13 @@ import { AdminComponent } from './admin/admin.component';
 import { CreateEventFormComponent } from './admin/create-event-form/create-event-form.component';
 import { EventListComponent } from './admin/event-list/event-list.component';
 import { adminGuard } from './guards/admin.guard';
-import { authGuard } from './guards/auth.guard'; 
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { UpdateEventFormComponent } from './admin/update-event-form/update-event-form.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
     {path: 'offers', component: OffersPageComponent},
-    {path: 'cart', component: CartPageComponent}, 
+    {path: 'cart/:id', component: CartPageComponent}, 
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegistrationComponent},
     {path: 'policy-confidantiality', component: PolicyConfidantialityComponent},
