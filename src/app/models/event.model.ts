@@ -1,4 +1,3 @@
-// src/app/models/event.model.ts
 export class Event {
     // Propriétés de l'événement
     eventTitle!: string;

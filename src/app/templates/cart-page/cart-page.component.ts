@@ -42,7 +42,6 @@ export class CartPageComponent implements OnInit {
     this.offersService.getOffers().subscribe({
       next: (data: Offer[]) => {
         this.offers = data;
-        console.log('Offres:', this.offers);
 
         // Préparer les données des offres pour une recherche rapide
         this.offers.forEach((offer) => {
@@ -95,7 +94,6 @@ export class CartPageComponent implements OnInit {
           timeRemaining: remainingTime > 0 ? remainingTime : 0,
         };
       });
-      console.log('Articles du panier:', this.cartItems);
       this.calculateTotalAmount();
       this.startCountdown(); // Démarrage du compte à rebours ici
     });

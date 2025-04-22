@@ -1,6 +1,3 @@
-// cart.model.ts
-import { CartItem } from '../models/cart-item.model';
-
 export interface Cart {
   cartId: number;       // Identifiant unique du panier
   status: string;       // Statut du panier (par exemple, 'EN_COURS', 'VALIDÉ')

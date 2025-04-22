@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { Offer } from '../../models/offer.model';
 import { CartService } from '../../services/cart.service';
-import { CartItem } from '../../models/cart-item.model';
+import { CartItemRequest } from '../../models/cart-item-request';
 
 @Component({
   selector: 'app-offers-page',
@@ -67,30 +67,20 @@ constructor(private offersService: OffersService, private cartService: CartServi
   
   
   addToCart(offer: any): void {
-    const cartItem: CartItem = {
+    const cartItemRequest: CartItemRequest = {
       offerId: offer.offerId,
       quantity: offer.quantity ?? 1,
-      qrcode: offer.qrcode ?? '',
       priceAtPurchase: offer.price ?? 0,
-      cartItemId: 0,
-      addedAt: new Date(),
-      expirationTime: new Date(Date.now() + 5 * 60 * 1000),
-      isExpired: false,
-      timeRemaining: 5 * 60 * 1000
+      cartId: offer.cartId ?? 0,
     };
-    console.log('PAnier:', this.cartService.getCart());
-    console.log('Tentative d’ajout au panier:', cartItem);
-  
     this.cartService.getCart().subscribe((cart) => {
       if (!cart) {
         this.cartService.createCart().subscribe((newCart) => {
-          this.cartService.addOfferToCart(newCart.cartId, cartItem).subscribe(() => {
-            console.log('Panier créé et offre ajoutée:', newCart.cartId, cartItem);
+          this.cartService.addOfferToCart(newCart.cartId, cartItemRequest).subscribe(() => {
           });
         });
       } else {
-        this.cartService.addOfferToCart(cart.cartId, cartItem).subscribe(() => {
-          console.log('Offre ajoutée au panier existant:', cart.cartId, cartItem);
+        this.cartService.addOfferToCart(cart.cartId, cartItemRequest).subscribe(() => {
         });
       }
     });

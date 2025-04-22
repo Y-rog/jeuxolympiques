@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Offer } from '../models/offer.model';
 import { Cart } from '../models/cart.model';
 import { CartItem } from '../models/cart-item.model';
+import { CartItemRequest } from '../models/cart-item-request';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,9 @@ export class CartService {
   }
 
   // Ajouter un article au panier
-  addOfferToCart(cartId: number, cartItem: CartItem): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${cartId}/items`, cartItem);
+  addOfferToCart(cartId: number, cartItemRequest: CartItemRequest): Observable<CartItemRequest> {
+    return this.http.post<CartItemRequest>(`${this.apiUrl}/${cartId}/items`, cartItemRequest);
   }
-  
 
   // Récupérer les articles du panier
   getCartItems(cartId: number): Observable<CartItem[]> {

@@ -1,4 +1,3 @@
-// cart-item.model.ts
 export interface CartItem {
   cartItemId: number,
   quantity: number,
