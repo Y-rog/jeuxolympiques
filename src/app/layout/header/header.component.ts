@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLinkActive, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 import { RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
@@ -18,8 +19,8 @@ export class HeaderComponent implements OnInit {
   private authService = inject(AuthService);
   isAdmin: boolean = false;
   isLoggedIn: boolean = false; // Variable pour vérifier si l'utilisateur est connecté
-
-  constructor(private router: Router) {}
+  cartId: number | undefined;
+  constructor(private router: Router, private cartService: CartService) {}
 
   ngOnInit(): void {
     // Écouter les changements de route
@@ -35,6 +36,9 @@ export class HeaderComponent implements OnInit {
 
     // Vérifier au démarrage si l'utilisateur est connecté
     this.checkIfLoggedIn();
+
+    // Récupérer le panier
+    this.getCart();
   }
 
   // Fonction pour vérifier si on est dans l'espace admin 
@@ -70,6 +74,17 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/home']);  // Rediriger l'utilisateur vers la page d'accueil
   }
 
-
+  getCart() {
+    this.cartService.getCart().subscribe({
+      next: (cart) => {
+        this.cartId = cart.cartId;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération du panier:', error);
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+  
   
 }

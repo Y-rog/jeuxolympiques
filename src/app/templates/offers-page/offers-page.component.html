@@ -16,6 +16,18 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Événement </mat-header-cell>
       <mat-cell *matCellDef="let offer"> {{ offer.eventTitle }} </mat-cell>
     </ng-container>
+
+    <!-- Nom de l'offre -->
+    <ng-container matColumnDef="offerCategoryTitle">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Offre </mat-header-cell>
+      <mat-cell *matCellDef="let offer"> {{ offer.offerCategoryTitle }} </mat-cell>
+    </ng-container>
+
+    <!-- Places par offre -->
+    <ng-container matColumnDef="offerCategoryPlacesPerOffer">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Places par offre </mat-header-cell>
+      <mat-cell *matCellDef="let offer"> {{ offer.offerCategoryPlacesPerOffer }} </mat-cell>
+    </ng-container>
   
     <!-- Date -->
     <ng-container matColumnDef="eventDateTime">
@@ -28,6 +40,13 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Lieu </mat-header-cell>
       <mat-cell *matCellDef="let offer"> {{ offer.eventLocation }} </mat-cell>
     </ng-container>
+
+    <!-- Offer id -->
+    <ng-container matColumnDef="offerId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let offer"> {{ offer.offerId }} </mat-cell>
+    </ng-container>
+    
   
     <!-- Prix -->
     <ng-container matColumnDef="price">
@@ -44,12 +63,25 @@
         </mat-icon>
       </mat-cell>
     </ng-container>
+
+    <!-- Quantité à ajouter -->
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Quantité </mat-header-cell>
+      <mat-cell *matCellDef="let offer">
+          <input type="number" class="input-quantity" [(ngModel)]="offer.quantity" min="1" max="5" [disabled]="!offer.availability" required #quantityInput="ngModel"/>
+          <mat-error *ngIf="quantityInput.invalid && (quantityInput.dirty || quantityInput.touched)">
+            Maximum 5
+          </mat-error>
+      </mat-cell>
+    </ng-container>
+    
+
   
     <!-- Action -->
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let offer">
-        <button mat-button class="custom-button" [disabled]="!offer.availability" (click)="reserveOffer(offer)">Ajouter au panier</button>
+        <button mat-button class="custom-button" [disabled]="!offer.availability" (click)="addToCart(offer)">Ajouter au panier</button>
       </mat-cell>
     </ng-container>
   

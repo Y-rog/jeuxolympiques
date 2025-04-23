@@ -1,4 +1,5 @@
 export interface Offer {
+    offerId: number | null;
     price: number;
     availability: boolean;
     eventId: number;
@@ -7,5 +8,6 @@ export interface Offer {
     eventDateTime: Date;
     offerCategoryId: number;
     offerCategoryTitle: string;
+    offerCategoryPlacesPerOffer: number;
   }
   

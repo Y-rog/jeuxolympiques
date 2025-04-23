@@ -4,7 +4,21 @@
     margin : 0px 200px
 }
 
-  
+.input-quantity {
+    width: 50px;
+    text-align: center;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.custom-button:disabled {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
   
   
 

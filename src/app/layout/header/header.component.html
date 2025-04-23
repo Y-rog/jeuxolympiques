@@ -10,7 +10,7 @@
       <button mat-button routerLink="/offers" routerLinkActive="active">Offres</button>
     </div>
     <div *ngIf="!isAdmin" class="nav-link-right">
-      <button mat-button routerLink="/cart" routerLinkActive="active">
+      <button mat-button [routerLink]="['/cart', cartId]" routerLinkActive="active">
         <span class="material-symbols-outlined">shopping_cart</span>
       </button>
       <button mat-flat-button routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn">Connexion</button>
