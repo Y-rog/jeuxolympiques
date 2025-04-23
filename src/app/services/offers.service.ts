@@ -15,5 +15,16 @@ export class OffersService {
   getOffers(): Observable<Offer[]> {
     return this.http.get<Offer[]>(this.apiUrl);
   }
+
+  // Vérifier la disponibilité des places pour un évenemnt
+  checkEventAvailability(offerId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/${offerId}/check-availability`);
+  }
+
+  // Restaurer la disponibilité d'une offre
+  restoreAvailability(offerId: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${offerId}/restore-availability`, null);
+  }
+  
    
 }

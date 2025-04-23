@@ -51,8 +51,22 @@
 }
 
 .delete-button:hover {
-    background-color: var(--tertiary-color);
+    background-color: var(--secondary-color);
     color: var(--white-color);
     border: 1px solid var(--white-color);
     transition: 0.3s;
 }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Ajoute une animation de fondu pour les éléments de la carte */
+.cart-item-card.fade-out {
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+  }
+  

@@ -8,16 +8,22 @@ import { OffersService } from '../../services/offers.service';
 import { Offer } from '../../models/offer.model';
 import { CartItem } from '../../models/cart-item.model';
 import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
+import { CountdownPipe } from '../../pipes/countdown.pipe';
 
+interface CartItemWithFade extends CartItem {
+  isFadingOut?: boolean;
+}
 @Component({
   selector: 'app-cart-page',
-  imports: [HeroSceneComponent, MatCardModule, CommonModule, MatIcon],
+  imports: [HeroSceneComponent, MatCardModule, CommonModule, MatIcon, CountdownPipe, MatButton],
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.css'
 })
+
 export class CartPageComponent implements OnInit {
   title = 'Panier';
-  cartItems: CartItem[] = [];
+  cartItems: CartItemWithFade[] = [];
   totalAmount = 0;
   cartId: any;
   offers: Offer[] = [];
@@ -95,7 +101,7 @@ export class CartPageComponent implements OnInit {
         };
       });
       this.calculateTotalAmount();
-      this.startCountdown(); // Démarrage du compte à rebours ici
+      this.startCountdown();
     });
   }
 
@@ -108,10 +114,24 @@ export class CartPageComponent implements OnInit {
 
   // Supprimer un article du panier
   removeItemFromCart(itemId: number): void {
-    this.cartService.removeItem(itemId).subscribe(() => {
+    this.cartService.removeItem(this.cartId, itemId).subscribe(() => {
+      // Retire visuellement l'article supprimé de la liste
+      this.cartItems = this.cartItems.filter(item => item.cartItemId !== itemId);
+  
+      // Recalcul du total
+      this.calculateTotalAmount();
       this.snackBar.open('Article supprimé du panier', 'Fermer', { duration: 2000 });
+        
+      //Remettre l'offre comme disponible
+    const offerId = this.cartItems.find(item => item.cartItemId === itemId)?.offerId;
+    if (offerId !== undefined) {
+      this.offersService.restoreAvailability(offerId).subscribe(() => {
+        console.log(`Disponibilité restaurée pour l'offre ${offerId}`);
+      });
+    }
     });
   }
+  
 
   // Logique pour gérer le compte à rebours
   startCountdown(): void {
@@ -126,6 +146,7 @@ export class CartPageComponent implements OnInit {
           item.isExpired = true;
           item.timeRemaining = 0;
           clearInterval(interval);
+          this.removeItemFromCart(item.cartItemId);
         } else {
           item.isExpired = false;
           item.timeRemaining = remainingTime;
@@ -133,5 +154,15 @@ export class CartPageComponent implements OnInit {
       }, 1000);
     });
   }
+
+  // Méthode pour aller à la page de paiement
+  goToPayment(): void {
+    console.log('Aller à la page de paiement');
+  }
+
+  emptyCart(): void {
+    console.log('Panier vide');
+  }
+
 }
 

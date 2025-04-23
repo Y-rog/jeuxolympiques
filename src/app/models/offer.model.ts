@@ -8,5 +8,6 @@ export interface Offer {
     eventDateTime: Date;
     offerCategoryId: number;
     offerCategoryTitle: string;
+    offerCategoryPlacesPerOffer: number;
   }
   
