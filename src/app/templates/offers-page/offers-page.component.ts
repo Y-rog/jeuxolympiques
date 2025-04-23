@@ -71,14 +71,7 @@ export class OffersPageComponent implements AfterViewInit {
   addToCart(offer: any): void {
     // qauntitté offres à ajouter
     const quantityOfferToAdd = offer.quantity ?? 1;
-    // Vérification de la disponibilité de l'offre
-    this.offersService.checkEventAvailability(offer.offerId).subscribe((isAvailable) => {
-      if (!isAvailable) {
-        this.showSnackBar("L'offre n'est plus disponible");
-        return;
-      }
 
-      // Si l'offre est disponible, procéder à l'ajout au panier
       this.cartService.getCart().subscribe((cart) => {
         if (!cart) {
           this.handleCreateCartAndAddItem(offer, quantityOfferToAdd);
@@ -86,7 +79,6 @@ export class OffersPageComponent implements AfterViewInit {
           this.handleExistingCart(cart.cartId, offer, quantityOfferToAdd);
         }
       });
-    });
   }
 
   // Méthode pour créer un panier et ajouter l'offre

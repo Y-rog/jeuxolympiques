@@ -121,14 +121,7 @@ export class CartPageComponent implements OnInit {
       // Recalcul du total
       this.calculateTotalAmount();
       this.snackBar.open('Article supprimé du panier', 'Fermer', { duration: 2000 });
-        
-      //Remettre l'offre comme disponible
-    const offerId = this.cartItems.find(item => item.cartItemId === itemId)?.offerId;
-    if (offerId !== undefined) {
-      this.offersService.restoreAvailability(offerId).subscribe(() => {
-        console.log(`Disponibilité restaurée pour l'offre ${offerId}`);
-      });
-    }
+
     });
   }
   
