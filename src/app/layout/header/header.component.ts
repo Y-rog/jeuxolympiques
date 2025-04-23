@@ -37,8 +37,13 @@ export class HeaderComponent implements OnInit {
     // Vérifier au démarrage si l'utilisateur est connecté
     this.checkIfLoggedIn();
 
-    // Récupérer le panier
-    this.getCart();
+    // Écoute le changement de token
+    this.authService.token$.subscribe(token => {
+      if (token) {
+        this.getCart();  // Rafraîchit le panier à chaque nouvelle session
+      }
+    });
+    
   }
 
   // Fonction pour vérifier si on est dans l'espace admin 

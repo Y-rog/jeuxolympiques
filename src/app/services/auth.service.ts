@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { JwtResponse } from '../models/jwt-response.model';
 import { LoginRequest } from '../models/login-request.model';
 import { jwtDecode } from 'jwt-decode';
@@ -14,6 +14,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   private authUrl = `${environment.apiUrl}/auth/login`;
   private tokenKey = 'token';
+  
 
   constructor(private http: HttpClient) { }
 
@@ -33,13 +34,20 @@ export class AuthService {
     return sessionStorage.getItem(this.tokenKey);
   }
 
+  private tokenSubject = new BehaviorSubject<string | null>(this.getToken());
+  token$ = this.tokenSubject.asObservable();
+
   saveToken(token: string): void {
-    sessionStorage.setItem(this.tokenKey, token);
+  sessionStorage.setItem(this.tokenKey, token);
+  this.tokenSubject.next(token);  // Notifie du changement
   }
+
 
   logout(): void {
     sessionStorage.removeItem(this.tokenKey);
+    this.tokenSubject.next(null);  // Notifie de la déconnexion
   }
+  
 
   getAuthHeaders(): HttpHeaders {
     const token = this.getToken();

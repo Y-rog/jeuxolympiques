@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginRequest } from '../../models/login-request.model';
 import { RouterLink } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,8 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
   hide: boolean = true; // Pour masquer ou afficher le mot de passe
+  private authChange = new Subject<void>();
+  authChange$ = this.authChange.asObservable();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,7 +53,6 @@ export class LoginComponent {
         if (JwtResponse && JwtResponse.token) {
           // Sauvegarder le token JWT dans sessionStorage
           this.authService.saveToken(JwtResponse.token);
-
           // Vérifier les rôles et rediriger vers la bonne page
           if (JwtResponse.roles.includes('ADMIN')) {
             this.router.navigate(['/admin']);
