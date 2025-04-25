@@ -114,21 +114,26 @@ export class CartPageComponent implements OnInit {
 
   // Supprimer un article du panier
   removeItemFromCart(itemId: number): void {
+    //On r// On récupère l'id de l'offre
+    const offerId = this.cartItems.find(item => item.cartItemId === itemId)?.offerId;
+    // On récupère l'offre correspondante
+    const offer = this.offers.find(offer => offer.offerId === offerId);
+    // On récupère l'id de l'événement
+    const eventId = offer?.eventId;   
     this.cartService.removeItem(this.cartId, itemId).subscribe(() => {
       // Retire visuellement l'article supprimé de la liste
       this.cartItems = this.cartItems.filter(item => item.cartItemId !== itemId);
-  
+      // On met à jour la disponibilité de l'offre
+      if (eventId) {
+        this.offersService.updateOffersAvailabilityByEvent(eventId).subscribe(() => {
+          console.log('Disponibilité de l\'offre mise à jour');
+        });
+      } else {
+        console.error('Aucun événement trouvé pour l\'offre supprimée.');
+      }
       // Recalcul du total
       this.calculateTotalAmount();
       this.snackBar.open('Article supprimé du panier', 'Fermer', { duration: 2000 });
-        
-      //Remettre l'offre comme disponible
-    const offerId = this.cartItems.find(item => item.cartItemId === itemId)?.offerId;
-    if (offerId !== undefined) {
-      this.offersService.restoreAvailability(offerId).subscribe(() => {
-        console.log(`Disponibilité restaurée pour l'offre ${offerId}`);
-      });
-    }
     });
   }
   
