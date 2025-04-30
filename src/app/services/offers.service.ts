@@ -16,4 +16,18 @@ export class OffersService {
     return this.http.get<Offer[]>(this.apiUrl);
   }
 
+  // Vérifier la disponibilité des places pour une offre avec quantité demandée
+  checkOfferAvailability(offerId: number, requestedQuantity: number): Observable<boolean> {
+    // Passer `requestedQuantity` comme un paramètre de requête
+    return this.http.get<boolean>(`${this.apiUrl}/${offerId}/check-availability`, {
+      params: { requestedQuantity: requestedQuantity.toString() }
+    });
+  }
+
+
+  // Vérifier la disponibilité des places pour un évenemnt
+  updateOffersAvailabilityByEvent(eventId: number): Observable<void> {
+    return this.http.get<void>(`${this.apiUrl}/update-offers-availability/event/${eventId}`);
+  }
+
 }

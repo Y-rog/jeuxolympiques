@@ -5,7 +5,6 @@ import { environment } from '../../environments/environment';
 import { Cart } from '../models/cart.model';
 import { CartItem } from '../models/cart-item.model';
 import { CartItemRequest } from '../models/cart-item-request';
-import { CartItemUpdateRequest } from '../models/cart-item-update-request';
 
 @Injectable({
   providedIn: 'root'
@@ -34,12 +33,6 @@ export class CartService {
   getCartItems(cartId: number): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(`${this.apiUrl}/${cartId}/items`);
   }
-
-  // Mettre à jour la quantité d'un article dans le panier
-  updateItemQuantity(cartId: number, itemId: number, cartItemUpdateRequest: CartItemUpdateRequest): Observable<CartItemUpdateRequest> {
-    return this.http.put<CartItemUpdateRequest>(`${this.apiUrl}/${cartId}/items/${itemId}`, cartItemUpdateRequest);
-  }
-  
 
   // Supprimer un article du panier
   removeItem(cartId: number, itemId: number): Observable<void> {
