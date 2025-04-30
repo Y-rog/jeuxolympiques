@@ -94,7 +94,6 @@ export class CartPageComponent implements OnInit {
           offerName,
           eventLocation,
           priceAtPurchase: item.priceAtPurchase,
-          quantity: item.quantity,
           totalPrice: item.priceAtPurchase * item.quantity,
           isExpired: remainingTime <= 0,
           timeRemaining: remainingTime > 0 ? remainingTime : 0,
@@ -108,7 +107,7 @@ export class CartPageComponent implements OnInit {
   // Calculer le montant total du panier
   calculateTotalAmount(): void {
     this.totalAmount = this.cartItems.reduce((total, item) => {
-      return total + item.priceAtPurchase * item.quantity;
+      return total + item.priceAtPurchase;
     }, 0);
   }
 
