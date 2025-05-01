@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Cart } from '../models/cart.model';
 import { CartItem } from '../models/cart-item.model';
@@ -11,6 +11,8 @@ import { CartItemRequest } from '../models/cart-item-request';
 })
 export class CartService {
   private apiUrl = `${environment.apiUrl}/cart`;
+  private cartSubject = new BehaviorSubject<any | null>(null);
+  cart$ = this.cartSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -20,8 +22,14 @@ export class CartService {
   }
 
   // Récupérer le panier
-  getCart(): Observable<Cart> {
-    return this.http.get<Cart>(`${this.apiUrl}`);
+  getCart(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}`).pipe(
+      tap(cart => this.cartSubject.next(cart)) 
+    );
+  }
+
+  updateCart(cart: any) {
+    this.cartSubject.next(cart);
   }
 
   // Ajouter un article au panier
@@ -37,6 +45,24 @@ export class CartService {
   // Supprimer un article du panier
   removeItem(cartId: number, itemId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${cartId}/items/${itemId}`);
+  }
+
+  // Simuler un paiement
+  simulatePayment(cartId: number, simulateFailure: boolean): Observable<string> {
+    const params = new HttpParams().set('simulateFailure', simulateFailure);
+    return this.http.post(`${this.apiUrl}/${cartId}/confirm-payment`, null, {
+      params,
+      responseType: 'text'
+    });
+  }
+  
+  
+  
+  
+
+  // Annuler le paiement
+  cancelPayment(cartId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/cancel-payment`, { cartId });
   }
 }
 

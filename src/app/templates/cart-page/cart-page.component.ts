@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeroSceneComponent } from '../../layout/hero-scene/hero-scene.component';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { OffersService } from '../../services/offers.service';
 import { Offer } from '../../models/offer.model';
@@ -10,6 +10,7 @@ import { CartItem } from '../../models/cart-item.model';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { CountdownPipe } from '../../pipes/countdown.pipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface CartItemWithFade extends CartItem {
   isFadingOut?: boolean;
@@ -34,8 +35,9 @@ export class CartPageComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
+    private offersService: OffersService,
     private snackBar: MatSnackBar,
-    private offersService: OffersService
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -161,7 +163,7 @@ export class CartPageComponent implements OnInit {
 
   // Méthode pour aller à la page de paiement
   goToPayment(): void {
-    console.log('Aller à la page de paiement');
+    this.router.navigate([`/cart/${this.cartId}/cart-summary`]);
   }
 
   emptyCart(): void {

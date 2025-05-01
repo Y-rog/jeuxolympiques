@@ -20,10 +20,12 @@ export class HeaderComponent implements OnInit {
   isAdmin: boolean = false;
   isLoggedIn: boolean = false; // Variable pour vérifier si l'utilisateur est connecté
   cartId: number | undefined;
+
   constructor(private router: Router, private cartService: CartService) {}
 
+  // components/header/header.component.ts
+
   ngOnInit(): void {
-    // Écouter les changements de route
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -31,55 +33,42 @@ export class HeaderComponent implements OnInit {
         this.checkIfLoggedIn();
       });
 
-    // Vérifier au démarrage si l'utilisateur est dans l'espace admin
     this.checkIfAdmin();
-
-    // Vérifier au démarrage si l'utilisateur est connecté
     this.checkIfLoggedIn();
 
-    // Écoute le changement de token
     this.authService.token$.subscribe(token => {
       if (token) {
-        this.getCart();  // Rafraîchit le panier à chaque nouvelle session
+        this.cartService.getCart().subscribe(); // charge le panier ET met à jour le cartSubject
       }
     });
-    
+
+    this.cartService.cart$.subscribe(cart => {
+      this.cartId = cart?.cartId;
+    });
   }
 
-  // Fonction pour vérifier si on est dans l'espace admin 
+
+  // Fonction pour vérifier si on est dans l'espace admin
   private checkIfAdmin(): void {
-    const currentUrl = this.router.url;
-    const isAdminRoute = currentUrl.includes('/admin');
-    
-    // Vérifier si l'utilisateur a le rôle admin grace au token JWT
     const token = this.authService.getRolesFromToken();
-    const userRoles = [...token];
-    const userRole = userRoles.find(role => role === 'ADMIN') || null;
-    
-    this.isAdmin = isAdminRoute && userRole === 'ADMIN';
+    this.isAdmin = token?.includes('ADMIN') ?? false; // Vérifier si l'utilisateur a le rôle 'ADMIN'
   }
 
+  // Fonction pour vérifier si l'utilisateur est connecté
   checkIfLoggedIn(): void {
-    // Vérifier si l'utilisateur est connecté
-    if (this.authService.isAuthenticated()) {
-      this.isLoggedIn = true;
-    }
-    else {
-      this.isLoggedIn = false;
-    }
+    this.isLoggedIn = this.authService.isAuthenticated();
   }
 
-
-  logout() {
-    // Appeler le service d'authentification pour se déconnecter
-    this.authService.logout();  
-    // Réinitialiser les variables d'état
+  // Déconnexion de l'utilisateur
+  logout(): void {
+    this.authService.logout();  // Appeler le service d'authentification pour se déconnecter
     this.isAdmin = false;
     this.isLoggedIn = false;
     this.router.navigate(['/home']);  // Rediriger l'utilisateur vers la page d'accueil
   }
 
-  getCart() {
+  // Récupérer le panier de l'utilisateur
+  getCart(): void {
     this.cartService.getCart().subscribe({
       next: (cart) => {
         this.cartId = cart.cartId;
@@ -90,6 +79,5 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-  
-  
 }
+

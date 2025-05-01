@@ -12,11 +12,13 @@ import { EventListComponent } from './admin/event-list/event-list.component';
 import { adminGuard } from './guards/admin.guard';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { UpdateEventFormComponent } from './admin/update-event-form/update-event-form.component';
+import { CartSummarizePageComponent } from './templates/cart-summarize-page/cart-summarize-page.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
     {path: 'offers', component: OffersPageComponent},
-    {path: 'cart/:id', component: CartPageComponent}, 
+    {path: 'cart/:id', component: CartPageComponent},
+    {path:'cart/:id/cart-summary', component: CartSummarizePageComponent}, 
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegistrationComponent},
     {path: 'policy-confidantiality', component: PolicyConfidantialityComponent},

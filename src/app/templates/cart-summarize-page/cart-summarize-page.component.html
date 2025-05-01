@@ -1,0 +1,35 @@
+<h1 class="page-title">Récapitulatif de la commande</h1>
+<div class="shopping-cart-container">
+  <div class="cart-items" *ngFor="let item of cartItems">
+    <mat-card class="cart-item-card">
+      <mat-card-header>
+        <mat-card-title>{{ eventNameMap.get(item.offerId) }}</mat-card-title>
+        <mat-card-subtitle>{{ offerNameMap.get(item.offerId) }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ eventLocationMap.get(item.offerId) }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="cart-item-details">
+          <p>
+            {{ eventDateTimeMap.get(item.offerId) | date: 'dd/MM/yyyy HH:mm' }}
+          </p>
+          <p>
+            Prix unitaire : {{ item.priceAtPurchase | currency:'EUR':'symbol' }}
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="total-amount">
+    <p *ngIf="cartItems.length === 0">Votre panier est vide.</p>
+    <p *ngIf="cartItems.length > 0">Montant total : {{ totalAmount | currency:'EUR':'symbol' }}</p>
+  </div>
+
+  <div class="action-buttons" *ngIf="cartItems.length > 0">
+    <button mat-button class="custom-button success-button" (click)="simulatePayment(false)">Simuler paiement validé</button>
+    <button mat-button class="custom-button failure-button" (click)="simulatePayment(true)">Simuler paiement échoué</button>
+    <button mat-button class="custom-stroked-button" [routerLink]="['/cart', cartId]">Annuler</button>
+  </div>
+</div>
+

@@ -1,6 +1,6 @@
 export interface Cart {
   cartId: number;       // Identifiant unique du panier
-  status: string;       // Statut du panier (par exemple, 'EN_COURS', 'VALIDÉ')
+  status: 'EN_ATTENTE' | 'PAYE';       // Statut du panier
   amount: number;       // Montant total du panier
   createdAt: string;    // Date de création du panier
   updatedAt: string;    // Date de la dernière mise à jour
