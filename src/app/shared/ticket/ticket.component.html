@@ -1,0 +1,13 @@
+<!-- ticket.component.html -->
+<div *ngIf="ticket">
+    <h1>{{ ticket.eventTitle }}</h1>
+    <p>Lieu : {{ ticket.eventLocation }}</p>
+    <p>Date : {{ ticket.eventDateTime }}</p>
+    <p>Catégorie : {{ ticket.offerCategoryTitle }}</p>
+    <p>Places par offre : {{ ticket.placesPerOffer }}</p>
+    <p>Prix : {{ ticket.priceAtPurchase }}</p>
+  
+    <h2>QR Code</h2>
+    <img *ngIf="ticket.qrCode" [src]="ticket.qrCode" alt="QR Code" />
+  </div>
+  

@@ -13,12 +13,14 @@ import { adminGuard } from './guards/admin.guard';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { UpdateEventFormComponent } from './admin/update-event-form/update-event-form.component';
 import { CartSummarizePageComponent } from './templates/cart-summarize-page/cart-summarize-page.component';
+import { TicketComponent } from './shared/ticket/ticket.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
     {path: 'offers', component: OffersPageComponent},
     {path: 'cart/:id', component: CartPageComponent},
     {path:'cart/:id/cart-summary', component: CartSummarizePageComponent}, 
+    {path: 'tickets/:id', component: TicketComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegistrationComponent},
     {path: 'policy-confidantiality', component: PolicyConfidantialityComponent},
