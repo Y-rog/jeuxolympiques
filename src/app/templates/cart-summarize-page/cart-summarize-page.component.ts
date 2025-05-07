@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OffersService } from '../../services/offers.service';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-summarize-page',
@@ -32,7 +32,8 @@ export class CartSummarizePageComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private snackBar: MatSnackBar,
-    private offersService: OffersService
+    private offersService: OffersService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -135,8 +136,10 @@ export class CartSummarizePageComponent implements OnInit {
             if (this.cartId !== null) {
               this.getCartItems(this.cartId);
             }
-            
+            // Rdirection vers la page des tickets
+          this.router.navigate(['/tickets']);
           });
+          
         }
       },
       error: () => {

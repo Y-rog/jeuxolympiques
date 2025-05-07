@@ -8,13 +8,14 @@
     <div *ngIf="!isAdmin" class="nav-link-center">
       <button mat-button routerLink="/home" routerLinkActive="active">Accueil</button>
       <button mat-button routerLink="/offers" routerLinkActive="active">Offres</button>
+      <button mat-button routerLink="/tickets" routerLinkActive="active">Mes billets</button>
     </div>
     <div *ngIf="!isAdmin" class="nav-link-right">
       <button *ngIf="cartId !== undefined" mat-button [routerLink]="['/cart', cartId]" routerLinkActive="active">
         <span class="material-symbols-outlined">shopping_cart</span>
       </button>
       <button mat-flat-button routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn">Connexion</button>
-  <button mat-flat-button (click)="logout()" *ngIf="isLoggedIn">Déconnexion</button>
+      <button mat-flat-button (click)="logout()" *ngIf="isLoggedIn">Déconnexion</button>
     </div>
   
       <!-- Barre de navigation verticale pour l'admin -->

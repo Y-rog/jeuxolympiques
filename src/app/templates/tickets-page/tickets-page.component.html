@@ -1,0 +1,13 @@
+<!-- ticket-list.component.html -->
+<div *ngIf="tickets.length > 0">
+    <h1>Mes tickets</h1>
+    <div *ngFor="let ticket of tickets" class="ticket-card">
+        <app-ticket [ticket]="ticket"></app-ticket>
+    </div>
+</div>
+  
+<div class="no-ticket" *ngIf="tickets.length === 0">
+    <p>Aucun ticket trouvé.</p>
+</div>
+  
+  

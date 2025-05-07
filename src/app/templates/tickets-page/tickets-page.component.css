@@ -1,0 +1,8 @@
+h1 {
+    color: var(--primary-color);
+}
+
+.no-ticket {
+    text-align: center;
+    margin-top: 20px;
+}

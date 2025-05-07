@@ -18,4 +18,8 @@ export class TicketService {
     return this.http.get<TicketResponse>(`${this.apiUrl}/${ticketId}`);
   }
 
+  getTickets(): Observable<TicketResponse[]> {
+    return this.http.get<TicketResponse[]>(`${this.apiUrl}/me`);  // Ajuste l'URL si nécessaire
+  }
+
 }

@@ -16,14 +16,18 @@
 
 .nav-link-left {
     text-align: left;
+    width: 33.33%;
 }
 
 .nav-link-right {
     text-align: right;
+    width: 33.33%;
 }
 
 .nav-link-center {
-    padding: 0 20px;
+    width: 33.33%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 /* Personnalisation des liens de la barre de navigation */

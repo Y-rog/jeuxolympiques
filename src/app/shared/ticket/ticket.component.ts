@@ -1,25 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TicketResponse } from '../../models/ticket-response.model';
-import { TicketService } from '../../services/ticket.service';
-import { ActivatedRoute } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import printJS from 'print-js';
 
 @Component({
   selector: 'app-ticket',
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './ticket.component.html',
-  styleUrl: './ticket.component.css'
+  styleUrls: ['./ticket.component.css']
 })
-export class TicketComponent implements OnInit {
-  ticket: TicketResponse | null = null;
-  constructor(private ticketService: TicketService, private route: ActivatedRoute) {}
+export class TicketComponent {
+  @Input() ticket!: TicketResponse;
 
-  ngOnInit(): void {
-    const ticketId = Number(this.route.snapshot.paramMap.get('id'));
-    if (ticketId) {
-      this.ticketService.getTicket(ticketId).subscribe((response) => {
-        this.ticket = response;
-      });
-    }
+  printTicket(): void {
+    const ticketElement = document.querySelector('.ticket-card') as HTMLElement;
+    
+    if (!ticketElement) return;
+
+    // Utilisation de PrintJS pour imprimer le ticket
+    printJS({
+      printable: ticketElement,
+      type: 'html',
+      targetStyles: ['*'],
+      style: `
+        .ticket-card {
+          margin: 10px!important;
+        }
+      `
+    });
   }
 }
+

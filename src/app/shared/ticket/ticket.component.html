@@ -1,13 +1,31 @@
-<!-- ticket.component.html -->
-<div *ngIf="ticket">
-    <h1>{{ ticket.eventTitle }}</h1>
-    <p>Lieu : {{ ticket.eventLocation }}</p>
-    <p>Date : {{ ticket.eventDateTime }}</p>
-    <p>Catégorie : {{ ticket.offerCategoryTitle }}</p>
-    <p>Places par offre : {{ ticket.placesPerOffer }}</p>
-    <p>Prix : {{ ticket.priceAtPurchase }}</p>
-  
-    <h2>QR Code</h2>
-    <img *ngIf="ticket.qrCode" [src]="ticket.qrCode" alt="QR Code" />
+<div *ngIf="ticket" class="ticket-card">
+  <div class="ticket-header">
+    <h2>{{ ticket.eventTitle }}</h2>
+    <div class="subtitle">
+      <p class="event-date">📅 {{ ticket.eventDateTime | date: 'dd/MM/yyyy HH:mm' }}</p>
+      <p class="price">Prix : {{ ticket.priceAtPurchase | currency:'EUR' }}</p>
+    </div>
   </div>
+
+  <div class="ticket-body">
+    <div class="left-ticket-body">
+      <p><strong>📍 Lieu :</strong> {{ ticket.eventLocation }}</p>
+      <p><strong>🎫 Catégorie :</strong> {{ ticket.offerCategoryTitle }}</p>
+      <p><strong>👥 Places :</strong> {{ ticket.placesPerOffer }}</p>
+    </div>
+    
+    <div class="ticket-qr">
+      <img *ngIf="ticket.qrCode" [src]="ticket.qrCode" alt="QR Code" />
+    </div>
+  </div>
+</div>
+
+<!-- Le bouton d'impression -->
+<div class="button-container">
+  <button mat-button class="custom-button" (click)="printTicket()">Imprimer le ticket</button>
+</div>
+
+
+
+
   

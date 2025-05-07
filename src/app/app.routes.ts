@@ -14,6 +14,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { UpdateEventFormComponent } from './admin/update-event-form/update-event-form.component';
 import { CartSummarizePageComponent } from './templates/cart-summarize-page/cart-summarize-page.component';
 import { TicketComponent } from './shared/ticket/ticket.component';
+import { TicketsPageComponent } from './templates/tickets-page/tickets-page.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
@@ -21,6 +22,7 @@ export const routes: Routes = [
     {path: 'cart/:id', component: CartPageComponent},
     {path:'cart/:id/cart-summary', component: CartSummarizePageComponent}, 
     {path: 'tickets/:id', component: TicketComponent},
+    {path: 'tickets', component: TicketsPageComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegistrationComponent},
     {path: 'policy-confidantiality', component: PolicyConfidantialityComponent},

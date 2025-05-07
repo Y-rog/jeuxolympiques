@@ -1,0 +1,53 @@
+.ticket-card {
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px auto;
+    max-width: 700px;
+    border: 1px solid var(--primary-color);
+}
+  
+.ticket-header {
+    border-bottom: 1px solid var(--tertiary-color);
+    margin-bottom: 10px;
+}
+  
+.ticket-header h2 {
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.subtitle p {
+    width: 50%;
+}
+  
+.ticket-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-ticket-body {
+    margin-top:20px;
+    width: 50%;
+}
+  
+.subtitle {
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary-color);
+}
+  
+.ticket-qr img {
+    width: 150px;
+    height: 150px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.price {
+    text-align: end;
+    margin-right: 25px;
+}
