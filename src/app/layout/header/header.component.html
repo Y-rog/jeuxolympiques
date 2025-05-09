@@ -1,8 +1,17 @@
 <header>
-  <nav [ngClass]="{'vertical-nav': isAdmin, 'horizontal-nav': !isAdmin}">
-      
-    <!-- Barre de navigation pour les utilisateurs classiques -->
-    <div *ngIf="!isAdmin" class="nav-link-left">
+  <!-- Bouton menu pour mobile -->
+  <div class="burger-menu" *ngIf="mobileView">
+    <button mat-icon-button (click)="toggleMobileMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <!-- Barre de navigation -->
+  <nav *ngIf="!isAdmin" [ngClass]="{'horizontal-nav': true,'mobile-hidden': mobileView && !mobileMenuOpen}">
+
+    
+    <!-- Utilisateur classique -->
+    <div *ngIf="!isAdmin && !mobileView" class="nav-link-left">
       <button mat-button routerLink="/home" routerLinkActive="active">Paris 2024</button>
     </div>
     <div *ngIf="!isAdmin" class="nav-link-center">
@@ -15,11 +24,13 @@
         <span class="material-symbols-outlined">shopping_cart</span>
       </button>
       <button mat-flat-button routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn">Connexion</button>
-      <button mat-flat-button (click)="logout()" *ngIf="isLoggedIn">Déconnexion</button>
+      <button mat-flat-button  (click)="logout()" *ngIf="isLoggedIn">Déconnexion</button>
     </div>
+  </nav>
   
-      <!-- Barre de navigation verticale pour l'admin -->
-    <div *ngIf="isAdmin">
+    <!-- Barre de navigation verticale pour l'admin -->
+  <nav *ngIf="isAdmin" [ngClass]="{'vertical-nav': true, 'mobile-hidden': mobileView && !mobileMenuOpen}">
+    <div class="vertical-nav-button-wrapper">
       <button class="vertical-nav-button" mat-button routerLink="/admin/create-event" routerLinkActive="active">
           Créer un événement
       </button>
@@ -40,4 +51,5 @@
   
   </nav>
 </header>
+
   

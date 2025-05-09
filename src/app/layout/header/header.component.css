@@ -85,3 +85,63 @@ button {
     width: 100%;
     margin-bottom: 15px;
 }
+
+/* Bouton burger (mobile) */
+.burger-menu {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--primary-color);
+    padding: 10px 20px;
+}
+  
+.burger-menu button {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+    border: none;
+}
+  
+  
+/* Responsive */
+@media (max-width: 768px) {
+    .horizontal-nav {
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+      padding: 10px 20px;
+    }
+  
+    .nav-link-left,
+    .nav-link-center,
+    .nav-link-right {
+        justify-content: center;
+    }
+
+    .nav-link-right {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-link-right button {
+        border: none;
+    }
+
+    .nav-link-center {
+      flex-direction: column;
+    }
+  
+    .vertical-nav {
+      position: static;
+      width: 100%;
+      height: auto;
+      padding: 20px;
+    }
+  
+    .vertical-nav-button {
+      text-align: center;
+    }
+
+    .mobile-hidden {
+        display: none !important;
+    }
+      
+}

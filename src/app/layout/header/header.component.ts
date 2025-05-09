@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,12 +20,15 @@ export class HeaderComponent implements OnInit {
   isAdmin: boolean = false;
   isLoggedIn: boolean = false; // Variable pour vérifier si l'utilisateur est connecté
   cartId: number | undefined;
+  mobileView: boolean = false;
+  mobileMenuOpen: boolean = false;
 
   constructor(private router: Router, private cartService: CartService) {}
 
   // components/header/header.component.ts
 
   ngOnInit(): void {
+    this.onResize();
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -79,5 +82,25 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.mobileView = window.innerWidth <= 768;
+    if (!this.mobileView) {
+      this.mobileMenuOpen = false;
+    }
+  }
+
+  closeMobileMenu(): void {
+    if (this.mobileView) {
+      this.mobileMenuOpen = false;
+    }
+  }
+  
+
 }
 
