@@ -1,3 +1,9 @@
 h1 {
     margin-left: 250px;
 }
+
+@media (max-width: 768px) {
+    h1 {
+        margin-left: 0;
+    }
+}

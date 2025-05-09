@@ -13,38 +13,38 @@
 
       <!-- Colonne Titre -->
       <ng-container matColumnDef="eventTitle">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Titre </th>
-        <td mat-cell *matCellDef="let element"> {{ element.eventTitle }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-title"> Titre </th>
+        <td mat-cell *matCellDef="let element" class="col-title"> {{ element.eventTitle }} </td>
       </ng-container>
 
       <!-- Colonne Description -->
       <ng-container matColumnDef="eventDescription">
-        <th mat-header-cell *matHeaderCellDef> Description </th>
-        <td mat-cell *matCellDef="let element"> {{ element.eventDescription }} </td>
+        <th mat-header-cell *matHeaderCellDef class="col-description"> Description </th>
+        <td mat-cell *matCellDef="let element" class="col-description"> {{ element.eventDescription }} </td>
       </ng-container>
 
       <!-- Colonne Lieu -->
       <ng-container matColumnDef="eventLocation">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Lieu </th>
-        <td mat-cell *matCellDef="let element"> {{ element.eventLocation }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-location"> Lieu </th>
+        <td mat-cell *matCellDef="let element" class="col-location"> {{ element.eventLocation }} </td>
       </ng-container>
 
       <!-- Colonne Date -->
       <ng-container matColumnDef="eventDateTime">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-        <td mat-cell *matCellDef="let element"> {{ element.eventDateTime | date:'dd/MM/yyyy HH:mm' }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-date"> Date </th>
+        <td mat-cell *matCellDef="let element" class="col-date"> {{ element.eventDateTime | date:'dd/MM/yyyy HH:mm' }} </td>
       </ng-container>
 
       <!-- Colonne Nombre de places -->
       <ng-container matColumnDef="eventPlacesNumber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de places </th>
-        <td mat-cell *matCellDef="let element"> {{ element.eventPlacesNumber }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-places-number"> Nombre de places </th>
+        <td mat-cell *matCellDef="let element"  class="col-places-number"> {{ element.eventPlacesNumber }} </td>
       </ng-container>
 
       <!-- Colonne Actions -->
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td class="button-container" mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef class="col-actions"> Actions </th>
+        <td class="button-container" mat-cell *matCellDef="let element" class="col-actions">
           <button class="icon-button" mat-icon-button (click)="editEvent(element)">
             <mat-icon>edit</mat-icon>
           </button>

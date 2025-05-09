@@ -166,9 +166,5 @@ export class CartPageComponent implements OnInit {
     this.router.navigate([`/cart/${this.cartId}/cart-summary`]);
   }
 
-  emptyCart(): void {
-    console.log('Panier vide');
-  }
-
 }
 

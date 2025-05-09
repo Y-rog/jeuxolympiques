@@ -1,20 +1,136 @@
+/* Conteneur principal de la section */
 .events-container {
-  max-width: 900px;
-  min-width: 100px;
-  margin: 20px auto 0;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding-left: 250px;
+  overflow-x: hidden; /* Empêche la page entière de scroller horizontalement */
 }
 
+/* Conteneur scrollable du tableau */
+.events-list {
+  overflow-x: auto; /* Active le scroll HORIZONTAL uniquement ici */
+  -webkit-overflow-scrolling: touch; /* Meilleur scroll sur mobile */
+}
+
+/* Le tableau doit avoir une largeur minimale pour déclencher le scroll */
+.events-list table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Empêche les retours à la ligne dans les cellules */
+.events-list th,
+.events-list td {
+  white-space: nowrap;
+}
+
+/* Icônes d’action */
 .icon-button {
-  margin-right: 10px;
   color: var(--primary-color);
+  min-width: 40px;
+  height: 40px;
+  margin: 0 4px;
 }
 
-/*Aligner les boutons sans bouger les lignes du tableau*/
+/* Alignement des boutons d’action */
 .button-container {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
 }
 
+h2 {
+  padding-left: 250px;
+}
+
+
+@media (max-width: 1080px) {
+
+  /* Désactiver le défilement horizontal global sur mobile */
+  .events-list {
+    overflow-x: hidden;
+  }
+
+  /* Ajuster la taille du tableau */
+  .events-list table {
+    table-layout: auto;
+    width: 100%;
+  }
+
+  /* Seules 3 colonnes sont visibles */
+  .col-title,
+  .col-date,
+  .col-actions,
+  .col-location,
+  .col-places-number {
+    display: table-cell;
+    width: 20%;
+  }
+
+  /* Cacher les colonnes non désirées */
+  .col-description{
+    display: none;
+  }
+
+  /* Adapter les cellules visibles à la largeur écran */
+  .events-list th,
+  .events-list td {
+    white-space: normal;
+    word-break: break-word;
+    padding: 8px;
+  }
+
+  /* Gérer le bouton de l'action (alignement) */
+  .button-container {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 880px) {
+
+  /* Seules 4 colonnes sont visibles */
+  .col-title,
+  .col-date,
+  .col-actions,
+  .col-location
+   {
+    display: table-cell;
+    width: 25%;
+  }
+
+  /* Cacher les colonnes non désirées */
+  .col-description,
+  .col-places-number{
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+
+    .events-container {
+      padding-left: 0;
+    }
+
+    h2 {
+      padding-left: 0;
+    }
   
+    /* Seules 3 colonnes sont visibles */
+    .col-title,
+    .col-date,
+    .col-actions {
+      display: table-cell;
+      width: 33.33%;
+    }
+  
+    /* Cacher les colonnes non désirées */
+    .col-location,
+    .col-places-number,
+    .col-description {
+      display: none;
+    }
+  
+  }
+
+}
