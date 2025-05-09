@@ -1,26 +1,62 @@
 .container {
-    background-color: white;
-    padding: 20px;
-    margin : 0px 200px
+  background-color: white;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .input-quantity {
-    width: 50px;
-    text-align: center;
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    padding: 5px;
+  width: 50px;
+  text-align: center;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .custom-button:disabled {
-    background-color: #ccc !important;
-    color: #666 !important;
-    cursor: not-allowed;
-    box-shadow: none;
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
-  
-  
+.full-label {
+    display: inline;
+ }
+.icon-only {
+    display: none;
+ }
 
-  
-  
+/* Cards en liste pour mobile */
+@media (max-width: 768px) {
+    .offers-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .offer-card {
+        margin: 10px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1080px) {
+    .full-label {
+      display: none;
+    }
+    .icon-only {
+      display: inline;
+    }
+
+    .custom-button {
+        padding-right: 5px;
+    }
+}
