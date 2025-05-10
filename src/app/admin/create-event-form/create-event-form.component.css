@@ -3,8 +3,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   width: 100%;
   height: 100%;
+  padding-left: 125px;
 }
 
 form {
@@ -51,4 +53,11 @@ form {
   height: 50px;
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    padding-left: 0;
+  }
+
 }

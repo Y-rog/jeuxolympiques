@@ -105,32 +105,31 @@ h2 {
   .col-places-number{
     display: none;
   }
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
 
-    .events-container {
-      padding-left: 0;
-    }
-
-    h2 {
-      padding-left: 0;
-    }
-  
-    /* Seules 3 colonnes sont visibles */
-    .col-title,
-    .col-date,
-    .col-actions {
-      display: table-cell;
-      width: 33.33%;
-    }
-  
-    /* Cacher les colonnes non désirées */
-    .col-location,
-    .col-places-number,
-    .col-description {
-      display: none;
-    }
-  
+  .events-container {
+    padding-left: 0;
   }
 
+  h2 {
+    padding-left: 0;
+  }
+  
+  /* Seules 3 colonnes sont visibles */
+  .col-title,
+  .col-date,
+  .col-actions {
+    display: table-cell;
+    width: 33.33%;
+  }
+  
+  /* Cacher les colonnes non désirées */
+  .col-location,
+  .col-places-number,
+  .col-description {
+    display: none;
+  }
+  
 }
