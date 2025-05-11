@@ -10,6 +10,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { NgIf } from '@angular/common';
 import { of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { dateInFutureValidator } from '../../validators/date.validator';
 
 @Component({
   selector: 'app-create-event-form',
@@ -35,7 +36,7 @@ export class CreateEventFormComponent {
       eventDescription: ['', [Validators.required, Validators.maxLength(500)]],
       eventLocation: ['', [Validators.required, Validators.maxLength(50)]],
       eventPlacesNumber: ['', [Validators.required, Validators.min(1), Validators.max(1000000)]],
-      eventDateTime: ['', [Validators.required]]
+      eventDateTime: ['', [Validators.required, dateInFutureValidator()]], 
     });
   }
 

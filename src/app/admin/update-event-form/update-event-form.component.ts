@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { dateInFutureValidator } from '../../validators/date.validator';
 
 @Component({
   standalone: true,
@@ -35,27 +36,30 @@ export class UpdateEventFormComponent implements OnInit {
       eventTitle: ['', [Validators.required, Validators.maxLength(50)]],
       eventDescription: ['', [Validators.required, Validators.maxLength(500)]],
       eventLocation: ['', [Validators.required, Validators.maxLength(50)]],
-      eventPlacesNumber: ['', Validators.required],
-      eventDateTime: ['', Validators.required]
+      eventPlacesNumber: ['', [Validators.required, Validators.min(1), Validators.max(1000000)]],
+      eventDateTime: ['', [Validators.required, dateInFutureValidator()]],
     });
 
     // Récupération de l'événement et gestion de la date
     if (this.eventId) {
       this.eventService.getEventById(Number(this.eventId)).subscribe({
         next: (event) => {
-          // Formater la date récupérée pour l'afficher dans le formulaire
-          const date = new Date(event.eventDateTime); 
+          console.log('event.eventDateTime reçu:', event.eventDateTime);
+          const date = new Date(event.eventDateTime);
+        
+          console.log('Date construite :', date.toISOString());
           const formattedDate = this.dateService.formatDateForInput(date);
-
-          // Remplir le formulaire avec les valeurs récupérées
+          console.log('Date formatée pour le champ:', formattedDate);
+        
           this.updateEventForm.patchValue({
             eventTitle: event.eventTitle,
             eventDescription: event.eventDescription,
             eventLocation: event.eventLocation,
             eventPlacesNumber: event.eventPlacesNumber,
-            eventDateTime: formattedDate  // Utilisation de la date formatée pour l'affichage
+            eventDateTime: formattedDate
           });
-        },
+        }
+        ,
         error: () => {
           this.errorMessage = "Impossible de charger l'événement.";
         }
@@ -70,8 +74,6 @@ export class UpdateEventFormComponent implements OnInit {
   
     const date = new Date(formData.eventDateTime);
     formData.eventDateTime = this.dateService.formatDateToString(date); // format "dd/MM/yyyy HH:mm"
-
-    console.log('FormData:', formData); // Debugging: Afficher les données du formulaire avant l'envoi
   
     this.eventService.updateEvent(Number(this.eventId), formData).subscribe({
       next: () => {

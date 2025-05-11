@@ -1,59 +1,74 @@
-# Jeuxolympiques
+# Application de Vente de Billetterie - JO 2024
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1.
+## Description
 
-## Development server
+Cette application est une plateforme de vente de billetterie pour les Jeux Olympiques de 2024, développée dans le cadre de mes études chez Studi. L'application permet à un utilisateur de s'inscrire, se connecter et acheter des billets pour différents événements des JO 2024. Un espace admin est également prévu pour gérer les événements et les offres.
 
-To start a local development server, run:
+## Liens du projet 
+- **Front :** : https://jeuxolympiques.gregoryfulgueiras.com
+- **API :** : https://api-jeuxolympiques.gregoryfulgueiras.com
+    swagger : https://api-jeuxolympiques.gregoryfulgueiras.com/swagger-ui/index.html
 
-```bash
-ng serve
-```
+## Fonctionnalités
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Visiteur
+- **Inscription :** Un visiteur peut créer un compte en fournissant des informations personnelles (nom, prénnom, email, mot de passe).
+- **Connexion :** Un visiteur peut se connecter à son compte existant.
+- **Achat de billets :** Une fois connecté, un utilisateur peut sélectionner un événement et acheter des billets.
 
-## Code scaffolding
+### Admin
+- **Gestion des événements :** L'admin peut créer, modifier et supprimer des événements.
+- **Gestion des offres :** L'admin peut créer, modifier et supprimer des offres.
+- **Statistiques et rapports :** L'admin peut consulter des rapports sur les ventes de billets.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Stack Technique
 
-```bash
-ng generate component component-name
-```
+- **Front-end :** Angular 19.1.6 (avec Angular Material pour l'UI)
+- **Back-end :** Spring Boot 3.4.3
+- **Base de données :** PostgreSQL 17.4
+- **Broker de message :** RabbitMQ 
+- **Déploiement :** Heroku avec addons Heroku Postgres et CloudAMQP
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Prérequis
 
-```bash
-ng generate --help
-```
+- Node.js v22.11.0
+- Avoir installé l'API https://github.com/Y-rog/api-jeuxolympiques.git
 
-## Building
+## Installation
 
-To build the project run:
+### Front-end (Angular)
 
-```bash
-ng build
-```
+1. Clonez le repository :
+   ```bash
+   git clone https://github.com/Y-rog/jeuxolympiques.git
+   cd jeuxolympiques
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+2. Installez les dépendances :
+    ```bash
+    npm install
 
-## Running unit tests
+3. Lancez l'application :
+    ```bash
+    ng serve
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+4. Accèder l'application :
+    ```bash
+    http://localhost:4200
+    ```
 
-```bash
-ng test
-```
+### Back-end (Srping Boot)
 
-## Running end-to-end tests
+ - voir Readme de l'API https://github.com/Y-rog/api-jeuxolympiques.git
 
-For end-to-end (e2e) testing, run:
+## Sécurité
 
-```bash
-ng e2e
-```
+ - Authentification via JWT, stocké en Session storage
+ - Protection des routes (guard)
+ - Validation des formulaires
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Ecolutions futures
+ - **Statistiques :** Différentes stats serait intéressant pour le client par ex: les ventes par événements et ajout de graphique pour améliorer l'expérience utilisateur.
+ - **Développemnt d'application mobile pour employé :**  une application mobile pour scanner les QrCode des billets.
+ - **Notifications :** exemple ajout de notifications à l’approche des événements
+ - **Gestion des SAV :** Par exemple pour des demandes de remboursements d'événements annulé.
+ - **Optimiser les performances de l’application  :** Implémenter un système de cache pour les offres et événements les plus consultés ou populaires.
