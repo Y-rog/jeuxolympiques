@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Nouvelle catégorie d'offre</h2>
+  <!-- Message d'erreur -->
+  <div *ngIf="errorMessage" class="form-error" role="alert">
+    {{ errorMessage }}
+  </div>
+<mat-dialog-content>
+  <form [formGroup]="categoryForm">
+    <mat-form-field class="form-group">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="title">
+      <mat-error *ngIf="categoryForm.get('title')?.hasError('required') && categoryForm.get('title')?.touched">
+        Le titre est obligatoire.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-group">
+      <mat-label>Places par offre</mat-label>
+      <input matInput type="number" formControlName="placesPerOffer">
+    <mat-error *ngIf="categoryForm.get('placesPerOffer')?.hasError('required') && categoryForm.get('placesPerOffer')?.touched">
+        Le nombre de places est obligatoire.
+    </mat-error>
+    <mat-error *ngIf="categoryForm.get('placesPerOffer')?.hasError('min')">
+        Le nombre de places doit être au minimum 1.
+    </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button class="custom-button" (click)="onCreate()" [disabled]="categoryForm.invalid">Créer</button>
+  <button mat-button class="custom-button-modal-cancel" (click)="onCancel()">Annuler</button>
+</mat-dialog-actions>
+

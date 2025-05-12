@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ConfirmationDialogComponent implements AfterViewInit {
 
-  @ViewChild('confirmButton') confirmButton!: ElementRef;  // Référence au bouton de confirmation
+  @ViewChild('confirmButton') confirmButton!: ElementRef; 
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,

@@ -1,0 +1,59 @@
+<div class="form-container">
+  <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="form-error" role="alert">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Message de succès -->
+    <div *ngIf="successMessage" class="form-success" role="status">
+      {{ successMessage }}
+    </div>
+  
+    <h2>Créer une offre</h2>
+  
+    <form [formGroup]="createOfferForm" (ngSubmit)="onSubmit()">
+  
+        <mat-form-field class="form-group">
+            <mat-label>Événement</mat-label>
+            <mat-select formControlName="eventId">
+              <mat-option value="" disabled selected hidden>-- Sélectionner un événement --</mat-option>
+              <mat-option *ngFor="let event of events" [value]="event.eventId">
+                {{ event.eventTitle }} – {{ event.eventLocation }} – {{ event.eventDateTime | date: 'dd/MM/yyyy' }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="createOfferForm.get('eventId')?.hasError('required') && createOfferForm.get('eventId')?.touched">
+              L'événement est obligatoire.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group full-width ">
+            <mat-label>Catégorie d'offre</mat-label>
+            <mat-select formControlName="offerCategoryId">
+              <mat-option value="" disabled>Sélectionner une catégorie</mat-option>
+              <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+                {{ category.title }} – {{ category.placesPerOffer }} places
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="createOfferForm.get('offerCategoryId')?.hasError('required') && createOfferForm.get('offerCategoryId')?.touched">
+              La catégorie est obligatoire.
+            </mat-error>
+        </mat-form-field>
+        <div class="add-category form-group">
+            <button mat-stroked-button type="button" (click)="openCategoryModal()">+ Ajouter une catégorie</button>
+        </div>
+
+        <mat-form-field class="form-group">
+            <mat-label>Prix (€)</mat-label>
+            <input matInput type="number" formControlName="price" />
+            <mat-error *ngIf="createOfferForm.get('price')?.hasError('required') && createOfferForm.get('price')?.touched">
+            Le prix est obligatoire.
+            </mat-error>
+            <mat-error *ngIf="createOfferForm.get('price')?.hasError('min')">
+            Le prix doit être supérieur à 0.
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button class="custom-button" type="submit">Créer l'offre</button>
+    </form>
+</div>
+  

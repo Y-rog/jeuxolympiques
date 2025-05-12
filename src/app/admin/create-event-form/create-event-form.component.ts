@@ -71,8 +71,7 @@ export class CreateEventFormComponent {
             this.successMessage = null;
           }, 5000);
         }),
-        catchError((error) => {
-          console.error('Erreur lors de la création de l\'événement', error);
+        catchError(() => {
           this.errorMessage = 'Une erreur est survenue lors de la création de l\'événement. Veuillez réessayer.';
           this.successMessage = null;
           return of(null);

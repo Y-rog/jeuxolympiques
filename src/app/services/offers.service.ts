@@ -29,5 +29,25 @@ export class OffersService {
   updateOffersAvailabilityByEvent(eventId: number): Observable<void> {
     return this.http.get<void>(`${this.apiUrl}/update-offers-availability/event/${eventId}`);
   }
+  
+  createOffer(offer: Offer): Observable<Offer> {
+    return this.http.post<Offer>(this.apiUrl, offer);
+  }
+
+  getAllOffers(): Observable<Offer[]> {
+    return this.http.get<Offer[]>(this.apiUrl);
+  }
+
+  getOfferById(id: number): Observable<Offer> {
+    return this.http.get<Offer>(`${this.apiUrl}/${id}`);
+  }
+
+  updateOffer(id: number, offer: Offer): Observable<Offer> {
+    return this.http.put<Offer>(`${this.apiUrl}/${id}`, offer);
+  }
+
+  deleteOffer(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 
 }

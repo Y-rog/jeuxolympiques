@@ -15,6 +15,7 @@ import { UpdateEventFormComponent } from './admin/update-event-form/update-event
 import { CartSummarizePageComponent } from './templates/cart-summarize-page/cart-summarize-page.component';
 import { TicketComponent } from './shared/ticket/ticket.component';
 import { TicketsPageComponent } from './templates/tickets-page/tickets-page.component';
+import { CreateOfferFormComponent } from './admin/create-offer-form/create-offer-form.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
@@ -33,6 +34,8 @@ export const routes: Routes = [
     {path: 'admin/create-event', component: CreateEventFormComponent, canActivate: [adminGuard]},
     {path: 'admin/event-list', component: EventListComponent, canActivate: [adminGuard]},
     {path: 'admin/update-event/:id', component: UpdateEventFormComponent, canActivate: [adminGuard]},
+    {path: 'admin/create-offer', component: CreateOfferFormComponent, canActivate: [adminGuard]},
+
 ];
 
 
