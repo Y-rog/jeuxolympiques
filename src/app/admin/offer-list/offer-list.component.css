@@ -1,0 +1,114 @@
+/* Conteneur principal de la section */
+.offers-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding-left: 250px;
+  overflow-x: hidden; /* Empêche la page entière de scroller horizontalement */
+}
+
+/* Conteneur scrollable du tableau */
+.offers-list {
+  overflow-x: auto; /* Active le scroll HORIZONTAL uniquement ici */
+  -webkit-overflow-scrolling: touch; /* Meilleur scroll sur mobile */
+}
+
+/* Le tableau doit avoir une largeur minimale pour déclencher le scroll */
+.offers-list table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Empêche les retours à la ligne dans les cellules */
+.offers-list th,
+.offers-list td {
+  white-space: nowrap;
+}
+
+/* Icônes d’action */
+.icon-button {
+  color: var(--primary-color);
+  min-width: 40px;
+  height: 40px;
+  margin: 0 4px;
+}
+
+/* Alignement des boutons d’action */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+h2 {
+  padding-left: 250px;
+}
+
+/* Icônes d’action */
+.icon-button {
+  color: var(--primary-color);
+  min-width: 40px;
+  height: 40px;
+  margin: 0 4px;
+}
+
+mat-slide-toggle {
+  margin: 0 auto;
+}
+
+
+
+
+@media (max-width: 1080px) {
+
+  /* Désactiver le défilement horizontal global sur mobile */
+  .offers-list {
+    overflow-x: hidden;
+  }
+
+  /* Ajuster la taille du tableau */
+  .offers-list table {
+    table-layout: auto;
+    width: 100%;
+  }
+
+  /* Adapter les cellules visibles à la largeur écran */
+  .offers-list th,
+  .offers-list td {
+    white-space: normal;
+  }
+
+  /* Gérer le bouton de l'action (alignement) */
+  .button-container {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 880px) {
+    .icon-button {
+        padding-bottom: 5px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+  .offers-container {
+    padding-left: 0;
+  }
+
+  h2 {
+    padding-left: 0;
+  }
+  
+}
+
+@media (max-width: 545px) {
+  /* Cacher les colonnes non désirées */
+  .col-event-location,
+  .col-event-date{
+    display: none;
+  }
+  
+}

@@ -24,6 +24,13 @@ export class OffersService {
     });
   }
 
+  
+  toggleActive(offerId: number): Observable<boolean> {
+  return this.http.patch<boolean>(`${this.apiUrl}/${offerId}/toggle-active`, {});
+  }
+
+
+
 
   // Vérifier la disponibilité des places pour un évenemnt
   updateOffersAvailabilityByEvent(eventId: number): Observable<void> {
@@ -36,6 +43,10 @@ export class OffersService {
 
   getAllOffers(): Observable<Offer[]> {
     return this.http.get<Offer[]>(this.apiUrl);
+  }
+
+  getAllOffersForAdmin(): Observable<Offer[]> {
+    return this.http.get<Offer[]>(`${this.apiUrl}/admin`);
   }
 
   getOfferById(id: number): Observable<Offer> {

@@ -16,6 +16,7 @@ import { CartSummarizePageComponent } from './templates/cart-summarize-page/cart
 import { TicketComponent } from './shared/ticket/ticket.component';
 import { TicketsPageComponent } from './templates/tickets-page/tickets-page.component';
 import { CreateOfferFormComponent } from './admin/create-offer-form/create-offer-form.component';
+import { OfferListComponent } from './admin/offer-list/offer-list.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomePageComponent},
@@ -35,6 +36,7 @@ export const routes: Routes = [
     {path: 'admin/event-list', component: EventListComponent, canActivate: [adminGuard]},
     {path: 'admin/update-event/:id', component: UpdateEventFormComponent, canActivate: [adminGuard]},
     {path: 'admin/create-offer', component: CreateOfferFormComponent, canActivate: [adminGuard]},
+    {path: 'admin/offer-list' , component: OfferListComponent, canActivate: [adminGuard]},
 
 ];
 
