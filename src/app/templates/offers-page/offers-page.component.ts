@@ -10,12 +10,14 @@ import { MatIcon } from '@angular/material/icon';
 import { MatOption } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Offer } from '../../models/offer.model';
 import { CartService } from '../../services/cart.service';
 import { CartItemRequest } from '../../models/cart-item-request';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCard } from '@angular/material/card';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-offers-page',
@@ -50,8 +52,10 @@ export class OffersPageComponent implements AfterViewInit {
   constructor(
     private offersService: OffersService,
     private cartService: CartService,
+    private breakpointObserver: BreakpointObserver, // Inject BreakpointObserver
+    private router: Router,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
-    private breakpointObserver: BreakpointObserver // Inject BreakpointObserver
   ) {
     // Écoute des changements de la taille de l'écran pour détecter si c'est une vue mobile
     this.breakpointObserver.observe('(max-width: 768px)')
@@ -106,6 +110,10 @@ export class OffersPageComponent implements AfterViewInit {
 
   // Méthode pour ajouter une offre au panier
   addToCart(offer: Offer): void {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
+
     if (offer.offerId === null) {
       this.showSnackBar("L'identifiant de l'offre est invalide.");
       return;

@@ -1,8 +1,10 @@
 <h2 class="title">Liste des offres</h2>
+<mat-dialog-content>{{ data.message }}</mat-dialog-content>
+
 
 <section class="offers-container">
   <div class="offers-list">
-    <table mat-table [dataSource]="offersDataSource" class="mat-elevation-z8" matSort>
+    <table mat-table [dataSource]="offersDataSource" matSort class="mat-elevation-z8" matSort>
 
         <!-- Colonne ID (masquée) -->
         <ng-container matColumnDef="offerId" *ngIf="false">
@@ -12,37 +14,37 @@
 
         <!-- Colonne Catégorie -->
         <ng-container matColumnDef="offerCategoryTitle">
-            <th mat-header-cell *matHeaderCellDef> Catégorie </th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Catégorie </th>
             <td mat-cell *matCellDef="let element"> {{ element.offerCategoryTitle }} </td>
         </ng-container>
 
         <!-- Colonne Prix -->
         <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix </th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef mat-sort-header> Prix </th>
             <td mat-cell *matCellDef="let element"> {{ element.price | currency:'EUR' }} </td>
         </ng-container>
 
         <!-- Colonne Événement -->
         <ng-container matColumnDef="eventTitle">
-            <th mat-header-cell *matHeaderCellDef> Événement </th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Événement </th>
             <td mat-cell *matCellDef="let element"> {{ element.eventTitle }} </td>
         </ng-container>
 
         <!-- Colonne Lieu -->
         <ng-container matColumnDef="eventLocation">
-            <th mat-header-cell *matHeaderCellDef class="col-event-location"> Lieu </th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef class="col-event-location"> Lieu </th>
             <td mat-cell *matCellDef="let element" class="col-event-location"> {{ element.eventLocation }} </td>
         </ng-container>
 
         <!-- Colonne Date -->
         <ng-container matColumnDef="eventDateTime">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col-event-date"> Date </th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef mat-sort-header class="col-event-date"> Date </th>
             <td mat-cell *matCellDef="let element" class="col-event-date"> {{ element.eventDateTime | date:'dd/MM/yyyy HH:mm' }} </td>
         </ng-container>
 
       <!-- Colonne Publier -->
         <ng-container matColumnDef="active">
-        <th mat-header-cell *matHeaderCellDef> Publier </th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Publier </th>
         <td mat-cell *matCellDef="let element">
             <mat-slide-toggle [checked]="element.active" (change)="toggleActive(element)">
             </mat-slide-toggle>

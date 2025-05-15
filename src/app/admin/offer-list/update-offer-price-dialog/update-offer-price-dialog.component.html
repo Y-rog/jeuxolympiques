@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Modifier le prix</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Nouveau prix</mat-label>
+    <input matInput type="number" [(ngModel)]="newPrice" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions><button mat-flat-button color="primary" (click)="save()">Valider</button>
+  <button mat-button (click)="cancel()">Annuler</button>
+</mat-dialog-actions>
+

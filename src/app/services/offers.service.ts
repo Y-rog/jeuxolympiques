@@ -28,10 +28,7 @@ export class OffersService {
   toggleActive(offerId: number): Observable<boolean> {
   return this.http.patch<boolean>(`${this.apiUrl}/${offerId}/toggle-active`, {});
   }
-
-
-
-
+  
   // Vérifier la disponibilité des places pour un évenemnt
   updateOffersAvailabilityByEvent(eventId: number): Observable<void> {
     return this.http.get<void>(`${this.apiUrl}/update-offers-availability/event/${eventId}`);
