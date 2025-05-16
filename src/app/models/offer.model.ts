@@ -10,5 +10,6 @@ export interface Offer {
     offerCategoryId: number;
     offerCategoryTitle: string;
     offerCategoryPlacesPerOffer: number;
+    salesCount: number | null;
 }
   

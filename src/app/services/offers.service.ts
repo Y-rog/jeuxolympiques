@@ -58,4 +58,8 @@ export class OffersService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  getStatsSalesOfferForAdmin(): Observable<Offer[]> {
+    return this.http.get<Offer[]>(`${this.apiUrl}/admin/stats/offers`);
+  }
+
 }

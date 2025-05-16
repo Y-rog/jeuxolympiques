@@ -12,13 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatDialogContent } from '@angular/material/dialog';
 import { UpdateOfferPriceDialogComponent } from './update-offer-price-dialog/update-offer-price-dialog.component';
 
 @Component({
   selector: 'app-offer-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, MatSlideToggleModule, MatDialogContent],
+  imports: [CommonModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, MatSlideToggleModule],
   templateUrl: './offer-list.component.html',
   styleUrl: './offer-list.component.css',
 })

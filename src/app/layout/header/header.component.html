@@ -31,6 +31,9 @@
     <!-- Barre de navigation verticale pour l'admin -->
   <nav *ngIf="isAdmin" [ngClass]="{'vertical-nav': true, 'mobile-hidden': mobileView && !mobileMenuOpen}">
     <div class="vertical-nav-button-wrapper">
+      <button class="vertical-nav-button" mat-button routerLink="/admin" routerLinkActive="active">
+          Accueil
+      </button>
       <button class="vertical-nav-button" mat-button routerLink="/admin/create-event" routerLinkActive="active">
           Créer un événement
       </button>

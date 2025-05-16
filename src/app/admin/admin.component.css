@@ -1,9 +1,194 @@
-h1 {
-    margin-left: 250px;
+/* Marges à gauche pour header, h1, h2 */
+h1, h2 {
+  margin-left: 250px;
+  padding-left: 0;
+  box-sizing: border-box;
 }
 
+h1,h2,h3 {
+  color: var(--primary-color);
+}
+
+h1 {
+  padding-bottom: 40px;
+}
+
+
+
+/* Conteneur principal : englobe le graphique + tableau */
+.offers-container {
+  max-width: 1200px;
+  margin: 20px auto 40px auto;
+  padding-left: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+/* Conteneur graphique (canvas prend 100%) */
+
+.charts-top-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 40px ;
+}
+
+.chart-top-left-container {
+  width: 30%;
+}
+
+
+
+.chart-top-right-container {
+  width: 70%;
+}
+
+.chart-card {
+  width: 100%;
+  height: 100%;
+}
+
+/* Conteneur scrollable du tableau */
+.offers-list {
+  overflow-x: auto; /* scroll horizontal uniquement ici */
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* Icônes d’action */
+.icon-button {
+  color: var(--primary-color);
+  min-width: 40px;
+  height: 40px;
+  margin: 0 4px;
+}
+
+.kpi-side-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Tableau KPI */
+.kpi-table {
+  display: flex;
+  flex-direction: column;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+.kpi-table thead {
+  background-color: #f5f5f5;
+  color: var(--primary-color);
+}
+
+.kpi-table tbody {
+  display: block;
+}
+
+.kpi-table tbody tr {
+  display: table;
+  justify-content: space-between;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.kpi-table th,
+.kpi-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+.kpi-table th {
+  display: table-cell;
+  text-align: left;
+}
+
+.kpi-value {
+  font-size: 1.2em;
+  color: var(--primary-color);
+  text-align: right;
+}
+
+/* MEDIA QUERIES */
+
+/* Mode mobile */
 @media (max-width: 768px) {
-    h1 {
-        margin-left: 0;
-    }
+  h1, h2 {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .offers-container {
+    padding-left: 0;
+    max-width: 100%;
+  }
+
+  .charts-bottom-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .chart-bottom-card,
+  .kpi-table {
+    height: auto;
+  }
+}
+
+/* Ajustement écrans moyens */
+@media (max-width: 1080px) {
+  .offers-list {
+    overflow-x: hidden;
+  }
+
+  .offers-list table {
+    table-layout: auto;
+    width: 100%;
+  }
+
+  .offers-list th,
+  .offers-list td {
+    white-space: normal;
+  }
+
+  .button-container {
+    flex-wrap: wrap;
+  }
+}
+
+/* Icônes action petits écrans */
+@media (max-width: 880px) {
+  .chart-card {
+    max-width: 100%;
+    display: none;
+  }
+  .col-event-location {
+    display: none;
+  }
+}
+
+/* Masquer colonnes inutiles sur très petits écrans */
+@media (max-width: 545px) {
+  .col-event-location,
+  .col-event-date {
+    display: none;
+  }
 }
