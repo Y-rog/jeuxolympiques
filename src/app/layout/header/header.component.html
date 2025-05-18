@@ -7,19 +7,23 @@
   </div>
 
   <!-- Barre de navigation -->
-  <nav *ngIf="!isAdmin" [ngClass]="{'horizontal-nav': true,'mobile-hidden': mobileView && !mobileMenuOpen}">
+  <nav *ngIf="!inAdminView" [ngClass]="{'horizontal-nav': true,'mobile-hidden': mobileView && !mobileMenuOpen}">
 
     
     <!-- Utilisateur classique -->
-    <div *ngIf="!isAdmin && !mobileView" class="nav-link-left">
+    <div *ngIf="!inAdminView && !mobileView" class="nav-link-left">
       <button mat-button routerLink="/home" routerLinkActive="active">Paris 2024</button>
     </div>
-    <div *ngIf="!isAdmin" class="nav-link-center">
+    <div *ngIf="!inAdminView" class="nav-link-center">
       <button mat-button routerLink="/home" routerLinkActive="active">Accueil</button>
       <button mat-button routerLink="/offers" routerLinkActive="active">Offres</button>
       <button mat-button routerLink="/tickets" routerLinkActive="active">Mes billets</button>
+      <button *ngIf="isAdmin" mat-button  routerLink="/admin" (click)="closeMobileMenu()">
+        <mat-icon>admin_panel_settings</mat-icon>
+        Espace Admin
+      </button>
     </div>
-    <div *ngIf="!isAdmin" class="nav-link-right">
+    <div *ngIf="!inAdminView" class="nav-link-right">
       <button *ngIf="cartId !== undefined" mat-button [routerLink]="['/cart', cartId]" routerLinkActive="active">
         <span class="material-symbols-outlined">shopping_cart</span>
       </button>
@@ -29,7 +33,7 @@
   </nav>
   
     <!-- Barre de navigation verticale pour l'admin -->
-  <nav *ngIf="isAdmin" [ngClass]="{'vertical-nav': true, 'mobile-hidden': mobileView && !mobileMenuOpen}">
+  <nav *ngIf="inAdminView" [ngClass]="{'vertical-nav': true, 'mobile-hidden': mobileView && !mobileMenuOpen}">
     <div class="vertical-nav-button-wrapper">
       <button class="vertical-nav-button" mat-button routerLink="/admin" routerLinkActive="active">
           Accueil
@@ -46,9 +50,9 @@
       <button class="vertical-nav-button" mat-button routerLink="/admin/offer-list" routerLinkActive="active">
           Gérer les offres
       </button>
-      <button (click)="logout()" class="vertical-nav-button" mat-button routerLinkActive="active">
+      <button (click)="quitAdminView()" class="vertical-nav-button" mat-button>
             Quitter
-        <mat-icon routerLink="/home" routerLinkActive="active">exit_to_app</mat-icon>
+        <mat-icon>exit_to_app</mat-icon>
       </button>
     </div>
   

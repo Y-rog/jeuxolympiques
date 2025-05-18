@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   private authService = inject(AuthService);
   isAdmin: boolean = false;
+  inAdminView: boolean = false; // Variable pour vérifier si l'utilisateur est dans l'espace admin
   isLoggedIn: boolean = false; // Variable pour vérifier si l'utilisateur est connecté
   cartId: number | undefined;
   mobileView: boolean = false;
@@ -29,19 +30,22 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.onResize();
+
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
+      .subscribe((event: NavigationEnd) => {
         this.checkIfAdmin();
         this.checkIfLoggedIn();
+        this.inAdminView = event.urlAfterRedirects.startsWith('/admin');
       });
 
     this.checkIfAdmin();
     this.checkIfLoggedIn();
+    this.inAdminView = this.router.url.startsWith('/admin');
 
     this.authService.token$.subscribe(token => {
       if (token) {
-        this.cartService.getCart().subscribe(); // charge le panier ET met à jour le cartSubject
+        this.cartService.getCart().subscribe();
       }
     });
 
@@ -49,6 +53,7 @@ export class HeaderComponent implements OnInit {
       this.cartId = cart?.cartId;
     });
   }
+
 
 
   // Fonction pour vérifier si on est dans l'espace admin
@@ -101,6 +106,11 @@ export class HeaderComponent implements OnInit {
     }
   }
   
+  quitAdminView(): void {
+    this.router.navigate(['/home']);
+    this.inAdminView = false;
+  }
+
 
 }
 
