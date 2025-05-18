@@ -1,28 +1,31 @@
-<div *ngIf="ticket" class="ticket-card">
-  <div class="ticket-header">
-    <h2>{{ ticket.eventTitle }}</h2>
-    <div class="subtitle">
-      <p class="event-date">📅 {{ ticket.eventDateTime | date: 'dd/MM/yyyy HH:mm' }}</p>
-      <p class="price">Prix : {{ ticket.priceAtPurchase | currency:'EUR' }}</p>
+<section *ngIf="ticket" [id]="'ticket-section-' + ticket.cartItemId">
+  <div class="ticket-card">
+    <div class="ticket-header">
+      <h2>{{ ticket.eventTitle }}</h2>
+      <div class="ticket-subtitle">
+        <p class="ticket-event-date">📅 {{ ticket.eventDateTime | date: 'dd/MM/yyyy HH:mm' }}</p>
+        <p class="ticket-price">Prix : {{ ticket.priceAtPurchase | currency:'EUR' }}</p>
+      </div>
     </div>
-  </div>
 
-  <div class="ticket-body">
-    <div class="left-ticket-body">
-      <p><strong>📍 Lieu :</strong> {{ ticket.eventLocation }}</p>
-      <p><strong>🎫 Catégorie :</strong> {{ ticket.offerCategoryTitle }}</p>
-      <p><strong>👥 Places :</strong> {{ ticket.placesPerOffer }}</p>
-    </div>
-    
-    <div class="ticket-qr">
-      <img *ngIf="ticket.qrCode" [src]="ticket.qrCode" alt="QR Code" />
+    <div class="ticket-body">
+      <div class="left-ticket-body">
+        <p><strong>📍 Lieu :</strong> {{ ticket.eventLocation }}</p>
+        <p><strong>🎫 Catégorie :</strong> {{ ticket.offerCategoryTitle }}</p>
+        <p><strong>👥 Places :</strong> {{ ticket.placesPerOffer }}</p>
+      </div>
+      
+      <div class="ticket-qr">
+        <img *ngIf="ticket.qrCode" [src]="ticket.qrCode" alt="QR Code" />
+      </div>
     </div>
   </div>
-</div>
+</section>
+  
 
 <!-- Le bouton d'impression -->
-<div class="button-container">
-  <button mat-button class="custom-button" ngxPrint>Imprimer le ticket</button>
+<div class="ticket-button-container">
+  <button mat-button class="custom-button" [useExistingCss] ="true" [printSectionId]="'ticket-section-' + ticket.cartItemId" ngxPrint>Imprimer le ticket</button>
 </div>
 
 

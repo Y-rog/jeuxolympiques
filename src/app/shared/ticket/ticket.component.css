@@ -16,7 +16,7 @@
     color: var(--primary-color);
 }
 
-.subtitle p {
+.ticket-subtitle p {
     width: 50%;
 }
   
@@ -30,7 +30,7 @@
     width: 50%;
 }
   
-.subtitle {
+.ticket-subtitle {
     display: flex;
     justify-content: space-between;
     color: var(--primary-color);
@@ -41,19 +41,13 @@
     height: 150px;
 }
 
-.button-container {
+.ticket-button-container {
     display: flex;
     justify-content: center;
     margin: 20px 0;
 }
 
-.price {
+.ticket-price {
     text-align: end;
     margin-right: 25px;
-}
-
-@media print {
-  .ticket-card {
-    margin: 10px !important;
-  }
 }

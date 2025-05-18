@@ -6,7 +6,7 @@ import { NgxPrintModule } from 'ngx-print';
 
 @Component({
   selector: 'app-ticket',
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, NgxPrintModule],
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.css']
 })

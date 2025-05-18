@@ -3,7 +3,6 @@ import { TicketResponse } from '../../models/ticket-response.model';
 import { TicketService } from '../../services/ticket.service';
 import { CommonModule } from '@angular/common';
 import { TicketComponent } from '../../shared/ticket/ticket.component';
-import printJS from 'print-js';
 
 @Component({
   selector: 'app-tickets-page',
