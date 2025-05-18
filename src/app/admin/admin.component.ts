@@ -73,9 +73,10 @@ export class AdminComponent implements OnInit {
 
 
       // Préparation du graphique : top 10 des offres les plus vendues
+      const numberBar = window.innerWidth <= 545 ? 3 : (window.innerWidth <= 1200 ? 5 : 10);
       const topOffers = offers
         .sort((a, b) => (b.salesCount ?? 0) - (a.salesCount ?? 0))
-        .slice(0, 10);
+        .slice(0, numberBar);
 
       const labels = topOffers.map(o => o.eventTitle + ' - ' + o.offerCategoryTitle);
       const data = topOffers.map(o => o.salesCount ?? 0);
@@ -151,7 +152,7 @@ export class AdminComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: 'Top 10 des offres les plus vendues'
+            text: `Top ${labels.length} des offres les plus vendues`
           }
         }
       }

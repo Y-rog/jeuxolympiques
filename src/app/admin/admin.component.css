@@ -28,6 +28,7 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-bottom: 40px;
 
 }
 
@@ -47,8 +48,6 @@ h1 {
   width: 30%;
 }
 
-
-
 .chart-top-right-container {
   width: 70%;
 }
@@ -59,7 +58,7 @@ h1 {
 }
 
 /* Conteneur scrollable du tableau */
-.offers-list {
+.sales-list {
   overflow-x: auto; /* scroll horizontal uniquement ici */
   -webkit-overflow-scrolling: touch;
 }
@@ -153,6 +152,22 @@ h1 {
   }
 }
 
+@media (max-width: 1200px) {
+  .charts-top-container {
+    flex-direction: column;
+    text-align: center;
+    
+  }
+
+  .chart-top-left-container {
+    width: 40%;
+    margin: 0 auto;
+  }
+  .chart-top-right-container {
+    width: 100%;
+  }
+}
+
 /* Ajustement écrans moyens */
 @media (max-width: 1080px) {
   .offers-list {
@@ -177,8 +192,7 @@ h1 {
 /* Icônes action petits écrans */
 @media (max-width: 880px) {
   .chart-card {
-    max-width: 100%;
-    display: none;
+    width: 100%;
   }
   .col-event-location {
     display: none;
@@ -190,5 +204,28 @@ h1 {
   .col-event-location,
   .col-event-date {
     display: none;
+  }
+
+  .kpi-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .kpi-side-content {
+    margin: 0 auto 40px auto;
+  }
+
+  .kpi-table {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .chart-top-left-container {
+    width: 70%;
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    padding-bottom: 20px;
   }
 }

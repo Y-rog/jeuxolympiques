@@ -34,10 +34,8 @@
     <p *ngIf="cartItems.length > 0">Montant total : {{ totalAmount | currency:'EUR':'symbol' }}</p>
   </div>
 
-  <div class="action-buttons">
-    <div class="go-to-paiement-button" *ngIf="cartItems.length > 0">
+  <div class="action-buttons" *ngIf="cartItems.length > 0">
       <button mat-button class="custom-button" (click)="goToPayment()">Valider le panier</button>
-    </div>
   </div>
 </div>
 

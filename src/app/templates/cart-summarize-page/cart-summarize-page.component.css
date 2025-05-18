@@ -63,5 +63,13 @@
 
 }
 
+@media (max-width: 545px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+}
+
 
   
