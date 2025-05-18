@@ -99,6 +99,19 @@ button {
     background-color: var(--primary-color);
     border: none;
 }
+@media (max-width: 1316px) {
+    .horizontal-nav {
+        padding: 0 20px;
+    }
+
+    .nav-link-left .nav-link-right {
+        width: 20%;
+    }
+    .nav-link-center {
+        width: 60%;
+    }
+    
+}
   
   
 /* Responsive */
@@ -127,6 +140,7 @@ button {
 
     .nav-link-center {
       flex-direction: column;
+      width: 100%;
     }
   
     .vertical-nav {
