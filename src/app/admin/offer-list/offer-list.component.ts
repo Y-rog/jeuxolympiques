@@ -118,7 +118,7 @@ export class OfferListComponent implements OnInit {
 
   deleteOffer(offer: Offer): void {
   const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-    data: { message: 'Voulez-vous vraiment supprimer cette offre ?' }
+    data: { message: `Voulez-vous vraiment supprimer l\'offre ${offer.offerCategoryTitle}, ${offer.eventTitle} ?` }
   });
 
     dialogRef.afterClosed().subscribe(result => {

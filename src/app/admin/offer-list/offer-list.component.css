@@ -19,10 +19,7 @@
 }
 
 /* Empêche les retours à la ligne dans les cellules */
-.offers-list th,
-.offers-list td {
-  white-space: nowrap;
-}
+
 
 /* Icônes d’action */
 .icon-button {
