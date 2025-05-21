@@ -33,19 +33,43 @@ export class RegistrationComponent {
       username: ['', [Validators.required, Validators.email]],  // Validation de l'email
       password: ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=(.*[A-Z]))(?=(.*[0-9]))(?=(.*[\W_]))[A-Za-z0-9\W_]{8,}$/)]],  // Validation du mot de passe
       confirmPassword: ['', [Validators.required]]  // Validation de la confirmation du mot de passe
-    }, { validators: this.passwordMatchValidator });  // Appel du validateur personnalisé
+    }, { validators: this.passwordMatchValidator } as any);  // Appel du validateur personnalisé
+  }
+
+  ngOnInit(): void {
+    // Mise à jour de la validation si un des champs change
+    this.registerForm.get('password')?.valueChanges.subscribe(() => {
+      this.registerForm.get('confirmPassword')?.updateValueAndValidity();
+    });
   }
 
   // Validation pour vérifier si les mots de passe correspondent
   passwordMatchValidator(form: FormGroup): { [key: string]: boolean } | null {
     const password = form.get('password')?.value;
-    const confirmPassword = form.get('confirmPassword')?.value;
+    const confirmPasswordControl = form.get('confirmPassword');
 
-    if (password && confirmPassword && password !== confirmPassword) {
-      return { passwordMismatch: true };
+    if (password && confirmPasswordControl) {
+      const confirmPassword = confirmPasswordControl.value;
+      if (password !== confirmPassword) {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+        return { passwordMismatch: true };
+      } else {
+        // Important : retirer l’erreur passwordMismatch si les mots de passe correspondent
+        if (confirmPasswordControl.hasError('passwordMismatch')) {
+          const errors = { ...confirmPasswordControl.errors };
+          delete errors['passwordMismatch'];
+          if (Object.keys(errors).length === 0) {
+            confirmPasswordControl.setErrors(null);
+          } else {
+            confirmPasswordControl.setErrors(errors);
+          }
+        }
+        return null;
+      }
     }
     return null;
   }
+
 
   // Soumettre le formulaire
   onSubmit(): void {
@@ -62,7 +86,6 @@ export class RegistrationComponent {
           this.router.navigate(['/login']);
         },
         error: (error) => {
-          console.error('Erreur lors de l\'inscription', error);
           if (error.status === 400) {
             this.errorMessage = 'Erreur lors de l\'inscription. Veuillez vérifier vos informations.';
           } else {
