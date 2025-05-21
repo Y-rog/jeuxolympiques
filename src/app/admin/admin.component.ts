@@ -159,7 +159,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  // (Facultatif) Si tu veux utiliser ChartConfiguration de Chart.js
   barChartLabels: string[] = [];
   barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [],
@@ -185,7 +184,7 @@ export class AdminComponent implements OnInit {
     const categoryCounts: { [key: string]: number } = {};
     this.offersDataSource.data.forEach(offer => {
       const category = offer.offerCategoryTitle || 'Inconnue';
-      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+      categoryCounts[category] = (categoryCounts[category] || 0) + (offer.salesCount ?? 0);
     });
 
     // Trier les catégories par nombre décroissant
