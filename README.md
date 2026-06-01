@@ -1,74 +1,76 @@
-# Application de Vente de Billetterie - JO 2024
+# 🏅 Billetterie Jeux Olympiques — Front-end Angular
 
-## Description
+Application web de billetterie pour les Jeux Olympiques, développée en Angular 19.
+Permet à un utilisateur de consulter les événements, acheter des billets et récupérer ses e-billets avec QR code.
 
-Cette application est une plateforme de vente de billetterie pour les Jeux Olympiques de 2024, développée dans le cadre de mes études chez Studi. L'application permet à un utilisateur de s'inscrire, se connecter et acheter des billets pour différents événements des JO 2024. Un espace admin est également prévu pour gérer les événements et les offres.
+## 🔗 Liens
 
-## Liens du projet 
-- **Front :** : https://jeuxolympiques.gregoryfulgueiras.com
-- **API :** : https://api-jeuxolympiques.gregoryfulgueiras.com
-    swagger : https://api-jeuxolympiques.gregoryfulgueiras.com/swagger-ui/index.html
+| | URL |
+|---|---|
+| 🌐 Application | https://jeuxolympiques-kappa.vercel.app |
+| ⚙️ API | https://web-production-acdd9.up.railway.app |
+| 📖 Swagger | https://web-production-acdd9.up.railway.app/swagger-ui/index.html |
+| 🔙 GitHub API | https://github.com/Y-rog/api-jeuxolympiques |
 
-## Fonctionnalités
+## 🧪 Compte de démonstration
+
+| Rôle | Email | Mot de passe |
+|---|---|---|
+| Utilisateur | usertest@mail.com | Test123@ |
+
+> 💡 Un compte admin est disponible sur demande pour les recruteurs.
+
+## ✨ Fonctionnalités
 
 ### Visiteur
-- **Inscription :** Un visiteur peut créer un compte en fournissant des informations personnelles (nom, prénnom, email, mot de passe).
-- **Connexion :** Un visiteur peut se connecter à son compte existant.
-- **Achat de billets :** Une fois connecté, un utilisateur peut sélectionner un événement et acheter des billets.
+- Inscription et connexion
+- Consultation des événements et offres disponibles
 
-### Admin
-- **Gestion des événements :** L'admin peut créer, modifier et supprimer des événements.
-- **Gestion des offres :** L'admin peut créer, modifier et supprimer des offres.
-- **Statistiques et rapports :** L'admin peut consulter des rapports sur les ventes de billets.
+### Utilisateur connecté
+- Ajout d'offres au panier
+- Simulation de paiement
+- Récupération des e-billets avec QR code unique
 
-## Stack Technique
+### Administrateur
+- CRUD événements et offres
+- Gestion de la disponibilité des offres
+- Statistiques de ventes
 
-- **Front-end :** Angular 19.1.6 (avec Angular Material pour l'UI)
-- **Back-end :** Spring Boot 3.4.3
-- **Base de données :** PostgreSQL 17.4
-- **Broker de message :** RabbitMQ 
-- **Déploiement :** Heroku avec addons Heroku Postgres et CloudAMQP
+## 🛠️ Stack technique
 
-## Prérequis
+- **Framework :** Angular 19
+- **UI :** Angular Material
+- **Authentification :** JWT (sessionStorage)
+- **Déploiement :** Vercel
 
-- Node.js v22.11.0
-- Avoir installé l'API https://github.com/Y-rog/api-jeuxolympiques.git
+## 🚀 Installation locale
 
-## Installation
+### Prérequis
+- Node.js v22+
+- API backend lancée → voir [api-jeuxolympiques](https://github.com/Y-rog/api-jeuxolympiques)
 
-### Front-end (Angular)
+### Étapes
 
-1. Clonez le repository :
-   ```bash
-   git clone https://github.com/Y-rog/jeuxolympiques.git
-   cd jeuxolympiques
+```bash
+git clone https://github.com/Y-rog/jeuxolympiques.git
+cd jeuxolympiques
+npm install
+ng serve
+```
 
-2. Installez les dépendances :
-    ```bash
-    npm install
+Accès : `http://localhost:4200`
 
-3. Lancez l'application :
-    ```bash
-    ng serve
+## 🔒 Sécurité
+- Authentification JWT stocké en sessionStorage
+- Protection des routes avec Guards Angular
+- Validation des formulaires
 
-4. Accèder l'application :
-    ```bash
-    http://localhost:4200
-    ```
+## 🔮 Évolutions futures
+- Notifications à l'approche des événements
+- Application mobile pour scanner les QR codes
+- Gestion des remboursements (SAV)
+- Système de cache pour les performances
+- Graphiques de statistiques pour l'admin
 
-### Back-end (Srping Boot)
-
- - voir Readme de l'API https://github.com/Y-rog/api-jeuxolympiques.git
-
-## Sécurité
-
- - Authentification via JWT, stocké en Session storage
- - Protection des routes (guard)
- - Validation des formulaires
-
-## Ecolutions futures
- - **Statistiques :** Différentes stats serait intéressant pour le client par ex: les ventes par événements et ajout de graphique pour améliorer l'expérience utilisateur.
- - **Développemnt d'application mobile pour employé :**  une application mobile pour scanner les QrCode des billets.
- - **Notifications :** exemple ajout de notifications à l’approche des événements
- - **Gestion des SAV :** Par exemple pour des demandes de remboursements d'événements annulé.
- - **Optimiser les performances de l’application  :** Implémenter un système de cache pour les offres et événements les plus consultés ou populaires.
+## 👤 Auteur
+Grégory Fulgueiras — [Portfolio](https://y-rog.com) · [LinkedIn](https://www.linkedin.com/in/fulgueiras-grégory-887267136/)
